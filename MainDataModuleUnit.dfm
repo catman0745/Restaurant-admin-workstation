@@ -3,6 +3,7 @@ object MainDataModule: TMainDataModule
   Height = 425
   Width = 572
   object SellingsConnection: TADOConnection
+    Connected = True
     ConnectionString = 
       'Provider=Microsoft.Jet.OLEDB.4.0;User ID=Admin;Data Source='#1055#1088#1086#1076#1072 +
       #1078#1080'.mdb;Mode=Share Deny None;Persist Security Info=False;Jet OLED' +
@@ -14,6 +15,7 @@ object MainDataModule: TMainDataModule
       ' OLEDB:Don'#39't Copy Locale on Compact=False;Jet OLEDB:Compact With' +
       'out Replica Repair=False;Jet OLEDB:SFP=False'
     LoginPrompt = False
+    Mode = cmShareDenyNone
     Provider = 'Microsoft.Jet.OLEDB.4.0'
     Left = 64
     Top = 40

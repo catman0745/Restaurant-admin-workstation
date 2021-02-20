@@ -22,4 +22,13 @@ object MainForm: TMainForm
     TabOrder = 0
     OnClick = RegisterNewCheckButtonClick
   end
+  object ManageDishesButton: TButton
+    Left = 456
+    Top = 235
+    Width = 171
+    Height = 25
+    Caption = #1059#1087#1088#1072#1074#1083#1077#1085#1080#1077' '#1084#1077#1085#1102
+    TabOrder = 1
+    OnClick = ManageDishesButtonClick
+  end
 end

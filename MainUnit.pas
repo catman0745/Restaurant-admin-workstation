@@ -9,7 +9,9 @@ uses
 type
   TMainForm = class(TForm)
     RegisterNewCheckButton: TButton;
+    ManageDishesButton: TButton;
     procedure RegisterNewCheckButtonClick(Sender: TObject);
+    procedure ManageDishesButtonClick(Sender: TObject);
   private
     { Private declarations }
   public
@@ -23,7 +25,12 @@ implementation
 
 {$R *.dfm}
 
-uses CreateCheckUnit;
+uses CreateCheckUnit, DishesUnit;
+
+procedure TMainForm.ManageDishesButtonClick(Sender: TObject);
+begin
+  DishesForm.Show
+end;
 
 procedure TMainForm.RegisterNewCheckButtonClick(Sender: TObject);
 begin
