@@ -1,7 +1,7 @@
 ﻿object CreateCheckDataModule: TCreateCheckDataModule
   OldCreateOrder = False
   Height = 173
-  Width = 509
+  Width = 727
   object OpenCheckQuery: TADOQuery
     Connection = MainDataModule.SellingsConnection
     Parameters = <>
@@ -12,6 +12,7 @@
     Top = 16
   end
   object DishInCheckQuery: TADOQuery
+    Active = True
     Connection = MainDataModule.SellingsConnection
     CursorType = ctStatic
     Parameters = <
@@ -105,5 +106,26 @@
       'WHERE '#1050#1086#1076' = :'#1050#1086#1076#1054#1090#1082#1088#1099#1090#1086#1075#1086#1063#1077#1082#1072)
     Left = 48
     Top = 120
+  end
+  object CheckSummaryQuery: TADOQuery
+    Connection = MainDataModule.SellingsConnection
+    Parameters = <
+      item
+        Name = 'CheckId'
+        Attributes = [paNullable]
+        DataType = ftWideString
+        NumericScale = 255
+        Precision = 255
+        Size = 510
+        Value = Null
+      end>
+    SQL.Strings = (
+      'SELECT CCur(Sum(Round('#1062#1077#1085#1072'*'#1050#1086#1083#1080#1095#1077#1089#1090#1074#1086',2))) AS '#1057#1090#1086#1080#1084#1086#1089#1090#1100
+      
+        'FROM '#1041#1083#1102#1076#1072' INNER JOIN ['#1041#1083#1102#1076#1086' '#1074' '#1095#1077#1082#1077'] ON '#1041#1083#1102#1076#1072'.'#1050#1086#1076' = ['#1041#1083#1102#1076#1086' '#1074' '#1095#1077#1082 +
+        #1077'].'#1041#1083#1102#1076#1086
+      'WHERE (((['#1041#1083#1102#1076#1086' '#1074' '#1095#1077#1082#1077'].['#1063#1077#1082'])=:CheckId));')
+    Left = 552
+    Top = 16
   end
 end

@@ -2,7 +2,7 @@ object CreateCheckForm: TCreateCheckForm
   Left = 0
   Top = 0
   Caption = #1056#1077#1075#1080#1089#1090#1088#1072#1094#1080#1103' '#1085#1086#1074#1086#1075#1086' '#1095#1077#1082#1072
-  ClientHeight = 337
+  ClientHeight = 405
   ClientWidth = 569
   Color = clBtnFace
   Font.Charset = DEFAULT_CHARSET
@@ -36,6 +36,13 @@ object CreateCheckForm: TCreateCheckForm
     Caption = #1050#1086#1083#1080#1095#1077#1089#1090#1074#1086':'
     FocusControl = CountDBEdit
   end
+  object CheckSummaryLabel: TLabel
+    Left = 8
+    Top = 291
+    Width = 100
+    Height = 13
+    Caption = #1057#1090#1086#1080#1084#1086#1089#1090#1100' '#1087#1086' '#1095#1077#1082#1091':'
+  end
   object OpenCheckButton: TButton
     Left = 8
     Top = 8
@@ -60,7 +67,7 @@ object CreateCheckForm: TCreateCheckForm
   end
   object SaveCheckButton: TButton
     Left = 8
-    Top = 304
+    Top = 372
     Width = 81
     Height = 25
     Caption = #1055#1088#1086#1074#1077#1089#1090#1080' '#1095#1077#1082
@@ -109,11 +116,19 @@ object CreateCheckForm: TCreateCheckForm
   end
   object CancelButton: TButton
     Left = 95
-    Top = 304
+    Top = 372
     Width = 75
     Height = 25
     Caption = #1054#1090#1084#1077#1085#1080#1090#1100
     TabOrder = 7
     OnClick = CancelButtonClick
+  end
+  object CheckSummaryEdit: TEdit
+    Left = 114
+    Top = 288
+    Width = 121
+    Height = 21
+    ReadOnly = True
+    TabOrder = 8
   end
 end

@@ -21,6 +21,7 @@ type
     DishesDataSource: TDataSource;
     DishInCheckDataSource2: TDataSource;
     CancelCheckQuery: TADOQuery;
+    CheckSummaryQuery: TADOQuery;
   private
     { Private declarations }
   public

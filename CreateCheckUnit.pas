@@ -5,7 +5,7 @@ interface
 uses
   Winapi.Windows, Winapi.Messages, System.SysUtils, System.Variants, System.Classes, Vcl.Graphics,
   Vcl.Controls, Vcl.Forms, Vcl.Dialogs, Data.DB, Vcl.Grids, Vcl.DBGrids,
-  Vcl.StdCtrls, Vcl.Mask, Vcl.DBCtrls;
+  Vcl.StdCtrls, Vcl.Mask, Vcl.DBCtrls, Math;
 
 type
   TCreateCheckForm = class(TForm)
@@ -20,6 +20,8 @@ type
     AddDishButton: TButton;
     DishIdDBLookupComboBox: TDBLookupComboBox;
     CancelButton: TButton;
+    CheckSummaryEdit: TEdit;
+    CheckSummaryLabel: TLabel;
     procedure OpenCheckButtonClick(Sender: TObject);
     procedure AddDishButtonClick(Sender: TObject);
     procedure SaveCheckButtonClick(Sender: TObject);
@@ -73,6 +75,8 @@ begin
 end;
 
 procedure TCreateCheckForm.AddDishButtonClick(Sender: TObject);
+var
+  checkSummary: Real;
 begin
   if DishIdDBLookupComboBox.KeyValue = null then
     begin
@@ -80,12 +84,18 @@ begin
       Exit
     end;
 
-
   CheckIdDBEdit.Text := intToStr(OpenedCheckId);
   CreateCheckDataModule.DishInCheckTable.Insert;
 
   CreateCheckdataModule.DishInCheckQuery.Active := false;
   CreateCheckdataModule.DishInCheckQuery.Active := true;
+
+  CreateCheckDataModule.CheckSummaryQuery.Parameters.ParamByName('CheckId').Value := OpenedCheckId;
+  CreateCheckDataModule.CheckSummaryQuery.Open;
+  CheckSummary := CreateCheckDataModule.CheckSummaryQuery.Fields.FieldByName('Стоимость').AsCurrency;
+  CreateCheckDataModule.CheckSummaryQuery.Close;
+
+  CheckSummaryEdit.Text := FloatToStr(CheckSummary);
 end;
 
 procedure TCreateCheckForm.CancelButtonClick(Sender: TObject);

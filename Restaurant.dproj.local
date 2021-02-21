@@ -6,19 +6,31 @@
     <Transaction>2021-02-16 17:37:07.000.222,C:\Users\catman\Desktop\Unit1.dfm=C:\Users\catman\Desktop\Курсач\MainUnit.dfm</Transaction>
     <Transaction>2021-02-16 17:37:32.000.149,C:\Users\catman\Desktop\Project1.dproj=C:\Users\catman\Desktop\Курсач\Restaurant.dproj</Transaction>
     <Transaction>2021-02-16 17:40:16.000.890,=C:\Users\catman\Desktop\Курсач\Unit1.pas</Transaction>
-    <Transaction>2021-02-16 17:41:50.000.767,C:\Users\catman\Desktop\Курсач\MainDataModuleUnit.dfm=C:\Users\catman\Desktop\Курсач\Unit1.dfm</Transaction>
     <Transaction>2021-02-16 17:41:50.000.767,C:\Users\catman\Desktop\Курсач\MainDataModuleUnit.pas=C:\Users\catman\Desktop\Курсач\Unit1.pas</Transaction>
+    <Transaction>2021-02-16 17:41:50.000.767,C:\Users\catman\Desktop\Курсач\MainDataModuleUnit.dfm=C:\Users\catman\Desktop\Курсач\Unit1.dfm</Transaction>
     <Transaction>2021-02-16 17:41:57.000.397,=C:\Users\catman\Desktop\Курсач\Unit1.pas</Transaction>
-    <Transaction>2021-02-16 17:43:25.000.877,C:\Users\catman\Desktop\Курсач\CreateCheckUnit.pas=C:\Users\catman\Desktop\Курсач\Unit1.pas</Transaction>
     <Transaction>2021-02-16 17:43:25.000.877,C:\Users\catman\Desktop\Курсач\CreateCheckUnit.dfm=C:\Users\catman\Desktop\Курсач\Unit1.dfm</Transaction>
+    <Transaction>2021-02-16 17:43:25.000.877,C:\Users\catman\Desktop\Курсач\CreateCheckUnit.pas=C:\Users\catman\Desktop\Курсач\Unit1.pas</Transaction>
     <Transaction>2021-02-16 17:47:04.000.834,=C:\Users\catman\Desktop\Курсач\Unit1.pas</Transaction>
-    <Transaction>2021-02-16 17:47:25.000.619,C:\Users\catman\Desktop\Курсач\CreateCheckDataModuleUnit.dfm=C:\Users\catman\Desktop\Курсач\Unit1.dfm</Transaction>
     <Transaction>2021-02-16 17:47:25.000.619,C:\Users\catman\Desktop\Курсач\CreateCheckDataModuleUnit.pas=C:\Users\catman\Desktop\Курсач\Unit1.pas</Transaction>
+    <Transaction>2021-02-16 17:47:25.000.619,C:\Users\catman\Desktop\Курсач\CreateCheckDataModuleUnit.dfm=C:\Users\catman\Desktop\Курсач\Unit1.dfm</Transaction>
     <Transaction>2021-02-17 17:19:48.000.214,=C:\Users\catman\Desktop\Курсач\Unit1.pas</Transaction>
     <Transaction>2021-02-17 17:20:06.000.263,C:\Users\catman\Desktop\Курсач\Unit1.dfm=C:\Users\catman\Desktop\Курсач\DishesDataModuleUnit.dfm</Transaction>
     <Transaction>2021-02-17 17:20:06.000.263,C:\Users\catman\Desktop\Курсач\Unit1.pas=C:\Users\catman\Desktop\Курсач\DishesDataModuleUnit.pas</Transaction>
     <Transaction>2021-02-17 17:20:11.000.818,=C:\Users\catman\Desktop\Курсач\Unit1.pas</Transaction>
-    <Transaction>2021-02-17 17:20:37.000.463,C:\Users\catman\Desktop\Курсач\Unit1.pas=C:\Users\catman\Desktop\Курсач\DishesUnit.pas</Transaction>
     <Transaction>2021-02-17 17:20:37.000.463,C:\Users\catman\Desktop\Курсач\Unit1.dfm=C:\Users\catman\Desktop\Курсач\DishesUnit.dfm</Transaction>
+    <Transaction>2021-02-17 17:20:37.000.463,C:\Users\catman\Desktop\Курсач\Unit1.pas=C:\Users\catman\Desktop\Курсач\DishesUnit.pas</Transaction>
+    <Transaction>2021-02-20 23:25:34.000.559,=C:\Users\catman\Desktop\Курсач\Unit1.pas</Transaction>
+    <Transaction>2021-02-20 23:25:49.000.739,C:\Users\catman\Desktop\Курсач\Unit1.pas=C:\Users\catman\Desktop\Курсач\Checks.pas</Transaction>
+    <Transaction>2021-02-20 23:25:49.000.739,C:\Users\catman\Desktop\Курсач\Unit1.dfm=C:\Users\catman\Desktop\Курсач\Checks.dfm</Transaction>
+    <Transaction>2021-02-20 23:26:01.000.614,C:\Users\catman\Desktop\Курсач\Checks.pas=</Transaction>
+    <Transaction>2021-02-20 23:26:28.000.125,=C:\Users\catman\Desktop\Курсач\Unit1.pas</Transaction>
+    <Transaction>2021-02-20 23:26:36.000.649,C:\Users\catman\Desktop\Курсач\Unit1.dfm=C:\Users\catman\Desktop\Курсач\ChecksUnit.dfm</Transaction>
+    <Transaction>2021-02-20 23:26:36.000.649,C:\Users\catman\Desktop\Курсач\Unit1.pas=C:\Users\catman\Desktop\Курсач\ChecksUnit.pas</Transaction>
+    <Transaction>2021-02-20 23:26:53.000.229,=C:\Users\catman\Desktop\Курсач\Unit1.pas</Transaction>
+    <Transaction>2021-02-20 23:27:04.000.379,C:\Users\catman\Desktop\Курсач\Unit1.dfm=C:\Users\catman\Desktop\Курсач\ChecksDataModuleUnit.dfm</Transaction>
+    <Transaction>2021-02-20 23:27:04.000.379,C:\Users\catman\Desktop\Курсач\Unit1.pas=C:\Users\catman\Desktop\Курсач\ChecksDataModuleUnit.pas</Transaction>
+    <Transaction>2021-02-20 23:28:42.000.876,C:\Users\catman\Desktop\Курсач\ChecksUnit.pas=</Transaction>
+    <Transaction>2021-02-20 23:28:50.000.876,C:\Users\catman\Desktop\Курсач\ChecksDataModuleUnit.pas=</Transaction>
   </Transactions>
 </BorlandProject>
