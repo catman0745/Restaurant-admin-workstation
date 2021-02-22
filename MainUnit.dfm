@@ -43,10 +43,19 @@ object MainForm: TMainForm
   object WaitersButton: TButton
     Left = 8
     Top = 8
-    Width = 75
+    Width = 177
     Height = 25
     Caption = #1054#1092#1080#1094#1080#1072#1085#1090#1099
     TabOrder = 3
     OnClick = WaitersButtonClick
+  end
+  object AssignationsButton: TButton
+    Left = 8
+    Top = 39
+    Width = 177
+    Height = 25
+    Caption = #1056#1072#1089#1087#1080#1089#1072#1085#1080#1077' '#1088#1072#1073#1086#1090#1099' '#1086#1092#1080#1094#1080#1072#1085#1090#1086#1074
+    TabOrder = 4
+    OnClick = AssignationsButtonClick
   end
 end

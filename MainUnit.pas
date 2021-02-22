@@ -12,10 +12,12 @@ type
     ManageDishesButton: TButton;
     Button1: TButton;
     WaitersButton: TButton;
+    AssignationsButton: TButton;
     procedure RegisterNewCheckButtonClick(Sender: TObject);
     procedure ManageDishesButtonClick(Sender: TObject);
     procedure Button1Click(Sender: TObject);
     procedure WaitersButtonClick(Sender: TObject);
+    procedure AssignationsButtonClick(Sender: TObject);
   private
     { Private declarations }
   public
@@ -29,7 +31,13 @@ implementation
 
 {$R *.dfm}
 
-uses CreateCheckUnit, DishesUnit, ShowChecksFormUnit, WaitersUnit;
+uses CreateCheckUnit, DishesUnit, ShowChecksFormUnit, WaitersUnit,
+  AssignationUnit;
+
+procedure TMainForm.AssignationsButtonClick(Sender: TObject);
+begin
+  AssignationForm.Show;
+end;
 
 procedure TMainForm.Button1Click(Sender: TObject);
 begin

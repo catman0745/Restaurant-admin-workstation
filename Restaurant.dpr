@@ -11,7 +11,9 @@ uses
   ShowChecksFormUnit in 'ShowChecksFormUnit.pas' {ShowChecksForm},
   ShowChecksDataModuleUnit in 'ShowChecksDataModuleUnit.pas' {ShowChecksDataModule: TDataModule},
   WaitersUnit in 'WaitersUnit.pas' {WaitersForm},
-  WaitersDataModuleUnit in 'WaitersDataModuleUnit.pas' {WaitersDataModule: TDataModule};
+  WaitersDataModuleUnit in 'WaitersDataModuleUnit.pas' {WaitersDataModule: TDataModule},
+  AssignationUnit in 'AssignationUnit.pas' {AssignationForm},
+  AssignationDataModuleUnit in 'AssignationDataModuleUnit.pas' {AssignationDataModule: TDataModule};
 
 {$R *.res}
 
@@ -28,5 +30,7 @@ begin
   Application.CreateForm(TShowChecksDataModule, ShowChecksDataModule);
   Application.CreateForm(TWaitersForm, WaitersForm);
   Application.CreateForm(TWaitersDataModule, WaitersDataModule);
+  Application.CreateForm(TAssignationForm, AssignationForm);
+  Application.CreateForm(TAssignationDataModule, AssignationDataModule);
   Application.Run;
 end.

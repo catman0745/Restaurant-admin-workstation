@@ -1,4 +1,4 @@
-unit WaitersDataModuleUnit;
+﻿unit WaitersDataModuleUnit;
 
 interface
 
