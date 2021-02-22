@@ -1,4 +1,4 @@
-unit MainDataModuleUnit;
+unit ShowChecksDataModuleUnit;
 
 interface
 
@@ -6,9 +6,10 @@ uses
   System.SysUtils, System.Classes, Data.DB, Data.Win.ADODB;
 
 type
-  TMainDataModule = class(TDataModule)
-    SellingsConnection: TADOConnection;
-    PersonnelConnection: TADOConnection;
+  TShowChecksDataModule = class(TDataModule)
+    ShowChecksQuery: TADOQuery;
+    ShowChecksDataSource: TDataSource;
+    CloseCheckQuery: TADOQuery;
   private
     { Private declarations }
   public
@@ -16,11 +17,13 @@ type
   end;
 
 var
-  MainDataModule: TMainDataModule;
+  ShowChecksDataModule: TShowChecksDataModule;
 
 implementation
 
 {%CLASSGROUP 'Vcl.Controls.TControl'}
+
+uses MainDataModuleUnit;
 
 {$R *.dfm}
 

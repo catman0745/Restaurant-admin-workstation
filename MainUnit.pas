@@ -10,8 +10,12 @@ type
   TMainForm = class(TForm)
     RegisterNewCheckButton: TButton;
     ManageDishesButton: TButton;
+    Button1: TButton;
+    WaitersButton: TButton;
     procedure RegisterNewCheckButtonClick(Sender: TObject);
     procedure ManageDishesButtonClick(Sender: TObject);
+    procedure Button1Click(Sender: TObject);
+    procedure WaitersButtonClick(Sender: TObject);
   private
     { Private declarations }
   public
@@ -25,7 +29,12 @@ implementation
 
 {$R *.dfm}
 
-uses CreateCheckUnit, DishesUnit;
+uses CreateCheckUnit, DishesUnit, ShowChecksFormUnit, WaitersUnit;
+
+procedure TMainForm.Button1Click(Sender: TObject);
+begin
+  ShowChecksForm.Show;
+end;
 
 procedure TMainForm.ManageDishesButtonClick(Sender: TObject);
 begin
@@ -35,6 +44,11 @@ end;
 procedure TMainForm.RegisterNewCheckButtonClick(Sender: TObject);
 begin
   CreateCheckForm.Show
+end;
+
+procedure TMainForm.WaitersButtonClick(Sender: TObject);
+begin
+  WaitersForm.Show;
 end;
 
 end.

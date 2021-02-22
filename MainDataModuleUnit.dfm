@@ -20,4 +20,15 @@ object MainDataModule: TMainDataModule
     Left = 64
     Top = 40
   end
+  object PersonnelConnection: TADOConnection
+    Connected = True
+    ConnectionString = 
+      'Provider=Microsoft.Jet.OLEDB.4.0;Data Source='#1055#1077#1088#1089#1086#1085#1072#1083'.mdb;Persis' +
+      't Security Info=False'
+    LoginPrompt = False
+    Mode = cmShareDenyNone
+    Provider = 'Microsoft.Jet.OLEDB.4.0'
+    Left = 208
+    Top = 40
+  end
 end

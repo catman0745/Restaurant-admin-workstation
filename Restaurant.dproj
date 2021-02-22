@@ -125,6 +125,24 @@
             <Form>DishesForm</Form>
             <FormType>dfm</FormType>
         </DCCReference>
+        <DCCReference Include="ShowChecksFormUnit.pas">
+            <Form>ShowChecksForm</Form>
+            <FormType>dfm</FormType>
+        </DCCReference>
+        <DCCReference Include="ShowChecksDataModuleUnit.pas">
+            <Form>ShowChecksDataModule</Form>
+            <FormType>dfm</FormType>
+            <DesignClass>TDataModule</DesignClass>
+        </DCCReference>
+        <DCCReference Include="WaitersUnit.pas">
+            <Form>WaitersForm</Form>
+            <FormType>dfm</FormType>
+        </DCCReference>
+        <DCCReference Include="WaitersDataModuleUnit.pas">
+            <Form>WaitersDataModule</Form>
+            <FormType>dfm</FormType>
+            <DesignClass>TDataModule</DesignClass>
+        </DCCReference>
         <BuildConfiguration Include="Release">
             <Key>Cfg_2</Key>
             <CfgParent>Base</CfgParent>
