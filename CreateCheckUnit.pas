@@ -29,6 +29,8 @@ type
     procedure ResetState();
     procedure LockForm();
     procedure UnlockForm();
+    procedure RefreshList();
+    function DishAlreadyInCheck(dishId: Integer): Boolean;
     procedure FormShow(Sender: TObject);
   private
     { Private declarations }
@@ -46,6 +48,12 @@ implementation
 {$R *.dfm}
 
 uses CreateCheckDataModuleUnit;
+
+procedure TCreateCheckForm.RefreshList();
+begin
+  CreateCheckdataModule.DishInCheckQuery.Active := false;
+  CreateCheckdataModule.DishInCheckQuery.Active := true;
+end;
 
 procedure TCreateCheckForm.ResetState();
 begin
@@ -74,6 +82,18 @@ begin
   AddDishButton.Enabled := true;
 end;
 
+function TCreateCheckForm.DishAlreadyInCheck(dishId: Integer): Boolean;
+begin
+  CreateCheckDataModule.UniquenessQuery.Parameters.ParamByName('CheckId').Value := OpenedCheckId;
+  CreateCheckDataModule.UniquenessQuery.Parameters.ParamByName('DishId').Value := dishId;
+
+  CreateCheckDataModule.UniquenessQuery.Open;
+
+  DishAlreadyInCheck := CreateCheckDataModule.UniquenessQuery.Fields.FieldByName('Количество таких блюд в чеке').AsInteger > 0;
+
+  CreateCheckDataModule.UniquenessQuery.Close;
+end;
+
 procedure TCreateCheckForm.AddDishButtonClick(Sender: TObject);
 var
   checkSummary: Real;
@@ -84,18 +104,34 @@ begin
       Exit
     end;
 
-  CheckIdDBEdit.Text := intToStr(OpenedCheckId);
-  CreateCheckDataModule.DishInCheckTable.Insert;
+  if DishAlreadyInCheck(DishIdDBLookupComboBox.KeyValue) then
+    begin
+      CreateCheckDataModule.UpdateCountQuery.Parameters.ParamByName('CheckId').Value := OpenedCheckId;
+      CreateCheckDataModule.UpdateCountQuery.Parameters.ParamByName('DishId').Value := DishIdDBLookupComboBox.KeyValue;
+      CreateCheckDataModule.UpdateCountQuery.Parameters.ParamByName('IncrementCount').Value := strToInt(CountDBEdit.Text);
 
-  CreateCheckdataModule.DishInCheckQuery.Active := false;
-  CreateCheckdataModule.DishInCheckQuery.Active := true;
+      CreateCheckDataModule.UpdateCountQuery.ExecSQL;
+      RefreshList();
 
+      DishIdDBLookupComboBox.KeyValue := null;
+      CountDbEdit.Text := '';
+    end
+  else
+    begin
+      CheckIdDBEdit.Text := intToStr(OpenedCheckId);
+      CreateCheckDataModule.DishInCheckTable.Insert;
+    end;
+
+  RefreshList;
+
+  // refresh check summary
   CreateCheckDataModule.CheckSummaryQuery.Parameters.ParamByName('CheckId').Value := OpenedCheckId;
   CreateCheckDataModule.CheckSummaryQuery.Open;
-  CheckSummary := CreateCheckDataModule.CheckSummaryQuery.Fields.FieldByName('Стоимость').AsCurrency;
-  CreateCheckDataModule.CheckSummaryQuery.Close;
 
+  CheckSummary := CreateCheckDataModule.CheckSummaryQuery.Fields.FieldByName('Стоимость').AsCurrency;
   CheckSummaryEdit.Text := FloatToStr(CheckSummary);
+
+  CreateCheckDataModule.CheckSummaryQuery.Close;
 end;
 
 procedure TCreateCheckForm.CancelButtonClick(Sender: TObject);

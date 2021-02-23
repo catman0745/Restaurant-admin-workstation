@@ -1,7 +1,7 @@
 ﻿object CreateCheckDataModule: TCreateCheckDataModule
   OldCreateOrder = False
   Height = 173
-  Width = 727
+  Width = 750
   object OpenCheckQuery: TADOQuery
     Connection = MainDataModule.SellingsConnection
     Parameters = <>
@@ -127,5 +127,71 @@
       'WHERE (((['#1041#1083#1102#1076#1086' '#1074' '#1095#1077#1082#1077'].['#1063#1077#1082'])=:CheckId));')
     Left = 552
     Top = 16
+  end
+  object UniquenessQuery: TADOQuery
+    Connection = MainDataModule.SellingsConnection
+    Parameters = <
+      item
+        Name = 'CheckId'
+        Attributes = [paNullable]
+        DataType = ftWideString
+        NumericScale = 255
+        Precision = 255
+        Size = 510
+        Value = Null
+      end
+      item
+        Name = 'DishId'
+        Attributes = [paNullable]
+        DataType = ftWideString
+        NumericScale = 255
+        Precision = 255
+        Size = 510
+        Value = Null
+      end>
+    SQL.Strings = (
+      
+        'SELECT Count(*) AS ['#1050#1086#1083#1080#1095#1077#1089#1090#1074#1086' '#1090#1072#1082#1080#1093' '#1073#1083#1102#1076' '#1074' '#1095#1077#1082#1077'] FROM ['#1041#1083#1102#1076#1086' '#1074' ' +
+        #1095#1077#1082#1077'] WHERE ['#1063#1077#1082'] = :CheckId AND ['#1041#1083#1102#1076#1086'] = :DishId')
+    Left = 672
+    Top = 16
+  end
+  object UpdateCountQuery: TADOQuery
+    Connection = MainDataModule.SellingsConnection
+    Parameters = <
+      item
+        Name = 'IncrementCount'
+        Attributes = [paNullable]
+        DataType = ftWideString
+        NumericScale = 255
+        Precision = 255
+        Size = 510
+        Value = Null
+      end
+      item
+        Name = 'DishId'
+        Attributes = [paNullable]
+        DataType = ftWideString
+        NumericScale = 255
+        Precision = 255
+        Size = 510
+        Value = Null
+      end
+      item
+        Name = 'CheckId'
+        Attributes = [paNullable]
+        DataType = ftWideString
+        NumericScale = 255
+        Precision = 255
+        Size = 510
+        Value = Null
+      end>
+    SQL.Strings = (
+      'UPDATE ['#1041#1083#1102#1076#1086' '#1074' '#1095#1077#1082#1077']'
+      'SET '#1050#1086#1083#1080#1095#1077#1089#1090#1074#1086' = '#1050#1086#1083#1080#1095#1077#1089#1090#1074#1086' + :IncrementCount'
+      'WHERE '#1041#1083#1102#1076#1086' = :DishId'
+      '     AND '#1063#1077#1082' = :CheckId')
+    Left = 672
+    Top = 64
   end
 end

@@ -22,6 +22,8 @@ type
     DishInCheckDataSource2: TDataSource;
     CancelCheckQuery: TADOQuery;
     CheckSummaryQuery: TADOQuery;
+    UniquenessQuery: TADOQuery;
+    UpdateCountQuery: TADOQuery;
   private
     { Private declarations }
   public
