@@ -10,12 +10,12 @@ type
   TMainForm = class(TForm)
     RegisterNewCheckButton: TButton;
     ManageDishesButton: TButton;
-    Button1: TButton;
+    ShowCkecksButton: TButton;
     WaitersButton: TButton;
     AssignationsButton: TButton;
     procedure RegisterNewCheckButtonClick(Sender: TObject);
     procedure ManageDishesButtonClick(Sender: TObject);
-    procedure Button1Click(Sender: TObject);
+    procedure ShowCkecksButtonClick(Sender: TObject);
     procedure WaitersButtonClick(Sender: TObject);
     procedure AssignationsButtonClick(Sender: TObject);
   private
@@ -39,7 +39,7 @@ begin
   AssignationForm.Show;
 end;
 
-procedure TMainForm.Button1Click(Sender: TObject);
+procedure TMainForm.ShowCkecksButtonClick(Sender: TObject);
 begin
   ShowChecksForm.Show;
 end;

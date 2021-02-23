@@ -27,6 +27,7 @@ type
     procedure AddDish();
     procedure UpdateDish();
     procedure DeleteDish();
+    function IsUniqueName(name: String; exceptionId: Integer): Boolean;
     procedure RefreshDishesList();
     function IsFloat(input: string): Boolean;
   private
@@ -108,11 +109,34 @@ begin
   end;
 end;
 
+function TDishesForm.IsUniqueName(name: String; exceptionId: Integer): Boolean;
+begin
+  DishesDataModule.DishesQuery.SQL.Clear;
+
+  DishesDataModule.DishesQuery.SQL.Add('SELECT Count(*) AS [Количество блюд с таким названием]');
+  DishesDataModule.DishesQuery.SQL.Add('FROM Блюда');
+  DishesDataModule.DishesQuery.SQL.Add('WHERE Название = :Name AND Код <> :ExceptionId');
+
+  DishesDataModule.DishesQuery.Parameters.ParamByName('Name').Value := name;
+  DishesDataModule.DishesQuery.Parameters.ParamByName('ExceptionId').Value := exceptionId;
+
+  DishesDataModule.DishesQuery.Open;
+
+  IsUniqueName := DishesDataModule.DishesQuery.Fields.FieldByName('Количество блюд с таким названием').AsInteger = 0;
+
+  DishesDataModule.DishesQuery.Close;
+end;
+
 procedure TDishesForm.AddDish();
 begin
   if DishNameEdit.GetTextLen = 0 then
     begin
       ShowMessage('Введите название блюда');
+      exit;
+    end;
+  if not IsUniqueName(DishNameEdit.Text, -1) then
+    begin
+      ShowMessage('Блюдо с таким названием уже есть в меню');
       exit;
     end;
 
@@ -156,6 +180,11 @@ begin
   if DishNameEdit.GetTextLen = 0 then
     begin
       ShowMessage('Введите название блюда');
+      exit;
+    end;
+  if not IsUniqueName(DishNameEdit.Text, DishIdLookupComboBox.KeyValue) then
+    begin
+      ShowMessage('Блюдо с таким названием уже есть в меню');
       exit;
     end;
 

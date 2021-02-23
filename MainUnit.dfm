@@ -31,14 +31,14 @@ object MainForm: TMainForm
     TabOrder = 1
     OnClick = ManageDishesButtonClick
   end
-  object Button1: TButton
+  object ShowCkecksButton: TButton
     Left = 456
     Top = 266
     Width = 171
     Height = 25
     Caption = #1055#1088#1086#1089#1084#1086#1090#1088' '#1095#1077#1082#1086#1074
     TabOrder = 2
-    OnClick = Button1Click
+    OnClick = ShowCkecksButtonClick
   end
   object WaitersButton: TButton
     Left = 8
