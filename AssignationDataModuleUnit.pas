@@ -15,6 +15,7 @@ type
     WeekdaysDataSource: TDataSource;
     AssignQuery: TADOQuery;
     CancelAssignationQuery: TADOQuery;
+    WorkloadQuery: TADOQuery;
   private
     { Private declarations }
   public

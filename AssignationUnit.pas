@@ -1,4 +1,4 @@
-unit AssignationUnit;
+﻿unit AssignationUnit;
 
 interface
 
@@ -22,6 +22,7 @@ type
     function ValidateWeekday(): Boolean;
     function ValidateShift(): Boolean;
     function ValidateWaiterId(): Boolean;
+    function WaiterWorkload(waiterId: Integer): Integer;
     procedure AssignButtonClick(Sender: TObject);
     procedure CancelAssigmentButtonClick(Sender: TObject);
   private
@@ -75,6 +76,16 @@ begin
   else ValidateWaiterId := true;
 end;
 
+function TAssignationForm.WaiterWorkload(waiterId: Integer): Integer;
+begin
+  AssignationDataModule.WorkloadQuery.Parameters.ParamByName('WaiterId').Value := waiterId;
+  AssignationDataModule.WorkloadQuery.Open;
+
+  WaiterWorkload := AssignationDataModule.WorkloadQuery.Fields.FieldByName('Количество смен').AsInteger;
+
+  AssignationDataModule.WorkloadQuery.Close;
+end;
+
 procedure TAssignationForm.AssignButtonClick(Sender: TObject);
 var
   dayOfWeek, shift, waiterId: Integer;
@@ -84,6 +95,12 @@ begin
       dayOfWeek := WeekDayDBLookupComboBox.KeyValue;
       shift := ShiftComboBox.ItemIndex + 1;
       waiterId := WaiterDBLookupComboBox.KeyValue;
+
+      if WaiterWorkload(waiterId) >= 6 then
+        begin
+          ShowMessage('Официант не может работать больше 48-ми часов (6 смен) в неделю');
+          exit;
+        end;
 
       AssignationDataModule.AssignQuery.Parameters.ParamByName('Weekday').Value := dayOfWeek;
       AssignationDataModule.AssignQuery.Parameters.ParamByName('Shift').Value := shift;

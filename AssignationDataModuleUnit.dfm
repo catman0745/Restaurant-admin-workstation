@@ -1,7 +1,7 @@
 object AssignationDataModule: TAssignationDataModule
   OldCreateOrder = False
   Height = 463
-  Width = 813
+  Width = 758
   object ShowAssignationsQuery: TADOQuery
     Active = True
     Connection = MainDataModule.PersonnelConnection
@@ -124,5 +124,24 @@ object AssignationDataModule: TAssignationDataModule
       '     AND ['#1056#1072#1073#1086#1090#1085#1080#1082'] = :WaiterId')
     Left = 664
     Top = 8
+  end
+  object WorkloadQuery: TADOQuery
+    Connection = MainDataModule.PersonnelConnection
+    Parameters = <
+      item
+        Name = 'WaiterId'
+        Attributes = [paNullable]
+        DataType = ftWideString
+        NumericScale = 255
+        Precision = 255
+        Size = 510
+        Value = Null
+      end>
+    SQL.Strings = (
+      'SELECT Count(*) AS ['#1050#1086#1083#1080#1095#1077#1089#1090#1074#1086' '#1089#1084#1077#1085']'
+      'FROM '#1040#1089#1089#1072#1081#1085#1099
+      'WHERE '#1056#1072#1073#1086#1090#1085#1080#1082' = :WaiterId')
+    Left = 560
+    Top = 56
   end
 end
