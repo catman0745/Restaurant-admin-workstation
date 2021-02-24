@@ -22,6 +22,7 @@ type
     function ValidateWeekday(): Boolean;
     function ValidateShift(): Boolean;
     function ValidateWaiterId(): Boolean;
+    function AlreadyAssigned(weekday: Integer; shift: Integer; waiterId: Integer): Boolean;
     function WaiterWorkload(waiterId: Integer): Integer;
     procedure AssignButtonClick(Sender: TObject);
     procedure CancelAssigmentButtonClick(Sender: TObject);
@@ -76,6 +77,18 @@ begin
   else ValidateWaiterId := true;
 end;
 
+function TAssignationForm.AlreadyAssigned(weekday: Integer; shift: Integer; waiterId: Integer): Boolean;
+begin
+  AssignationDataModule.AlreadyAssignedCheckQuery.Parameters.ParamByName('Weekday').Value := weekday;
+  AssignationDataModule.AlreadyAssignedCheckQuery.Parameters.ParamByName('Shift').Value := shift;
+  AssignationDataModule.AlreadyAssignedCheckQuery.Parameters.ParamByName('WaiterId').Value := waiterId;
+  AssignationDataModule.AlreadyAssignedCheckQuery.Open;
+
+  AlreadyAssigned := AssignationDataModule.AlreadyAssignedCheckQuery.Fields.FieldByName('Сколько раз назначен').AsInteger = 1;
+
+  AssignationDataModule.AlreadyAssignedCheckQuery.Close;
+end;
+
 function TAssignationForm.WaiterWorkload(waiterId: Integer): Integer;
 begin
   AssignationDataModule.WorkloadQuery.Parameters.ParamByName('WaiterId').Value := waiterId;
@@ -96,6 +109,11 @@ begin
       shift := ShiftComboBox.ItemIndex + 1;
       waiterId := WaiterDBLookupComboBox.KeyValue;
 
+      if AlreadyAssigned(dayOfWeek, shift, waiterId) then
+        begin
+          ShowMessage('Официант уже назначен на выбранную смену в этот день');
+          exit;
+        end;
       if WaiterWorkload(waiterId) >= 6 then
         begin
           ShowMessage('Официант не может работать больше 48-ми часов (6 смен) в неделю');

@@ -16,6 +16,7 @@ type
     AssignQuery: TADOQuery;
     CancelAssignationQuery: TADOQuery;
     WorkloadQuery: TADOQuery;
+    AlreadyAssignedCheckQuery: TADOQuery;
   private
     { Private declarations }
   public

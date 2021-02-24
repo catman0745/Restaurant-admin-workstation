@@ -144,4 +144,28 @@ object AssignationDataModule: TAssignationDataModule
     Left = 560
     Top = 56
   end
+  object AlreadyAssignedCheckQuery: TADOQuery
+    Connection = MainDataModule.PersonnelConnection
+    Parameters = <
+      item
+        Name = 'Weekday'
+        Value = Null
+      end
+      item
+        Name = 'Shift'
+        Value = Null
+      end
+      item
+        Name = 'WaiterId'
+        Value = Null
+      end>
+    SQL.Strings = (
+      'SELECT Count(*) AS ['#1057#1082#1086#1083#1100#1082#1086' '#1088#1072#1079' '#1085#1072#1079#1085#1072#1095#1077#1085']'
+      'FROM '#1040#1089#1089#1072#1081#1085#1099
+      'WHERE ['#1044#1077#1085#1100' '#1085#1077#1076#1077#1083#1080'] = :Weekday'
+      '     AND ['#1053#1086#1084#1077#1088' '#1089#1084#1077#1085#1099'] = :Shift'
+      '     AND ['#1056#1072#1073#1086#1090#1085#1080#1082'] = :WaiterId')
+    Left = 560
+    Top = 104
+  end
 end
