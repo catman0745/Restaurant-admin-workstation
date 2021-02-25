@@ -1,7 +1,7 @@
 ﻿object WaitersDataModule: TWaitersDataModule
   OldCreateOrder = False
   Height = 323
-  Width = 382
+  Width = 277
   object WaitersTable: TADOTable
     Active = True
     Connection = MainDataModule.Connection
@@ -18,12 +18,12 @@
       Size = 30
     end
   end
-  object WaitersDataSource: TDataSource
+  object DisplayDataSource: TDataSource
     DataSet = WaitersTable
     Left = 40
     Top = 56
   end
-  object InsertQuery: TADOQuery
+  object AddQuery: TADOQuery
     Connection = MainDataModule.Connection
     Parameters = <
       item

@@ -8,10 +8,10 @@ uses
 type
   TWaitersDataModule = class(TDataModule)
     WaitersTable: TADOTable;
-    WaitersDataSource: TDataSource;
+    DisplayDataSource: TDataSource;
     WaitersTableЛичныйномер: TAutoIncField;
     WaitersTableФИО: TWideStringField;
-    InsertQuery: TADOQuery;
+    AddQuery: TADOQuery;
     UpdateQuery: TADOQuery;
     DeleteQuery: TADOQuery;
   private
