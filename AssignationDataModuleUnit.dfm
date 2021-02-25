@@ -4,7 +4,7 @@ object AssignationDataModule: TAssignationDataModule
   Width = 758
   object ShowAssignationsQuery: TADOQuery
     Active = True
-    Connection = MainDataModule.PersonnelConnection
+    Connection = MainDataModule.Connection
     CursorType = ctStatic
     Parameters = <>
     SQL.Strings = (
@@ -27,7 +27,7 @@ object AssignationDataModule: TAssignationDataModule
   end
   object WaitersTable: TADOTable
     Active = True
-    Connection = MainDataModule.PersonnelConnection
+    Connection = MainDataModule.Connection
     CursorType = ctStatic
     TableName = #1055#1077#1088#1089#1086#1085#1072#1083
     Left = 296
@@ -35,7 +35,7 @@ object AssignationDataModule: TAssignationDataModule
   end
   object WeekdaysTable: TADOTable
     Active = True
-    Connection = MainDataModule.PersonnelConnection
+    Connection = MainDataModule.Connection
     CursorType = ctStatic
     TableName = #1044#1085#1080' '#1085#1077#1076#1077#1083#1080
     Left = 408
@@ -52,7 +52,7 @@ object AssignationDataModule: TAssignationDataModule
     Top = 56
   end
   object AssignQuery: TADOQuery
-    Connection = MainDataModule.PersonnelConnection
+    Connection = MainDataModule.Connection
     Parameters = <
       item
         Name = 'Weekday'
@@ -88,7 +88,7 @@ object AssignationDataModule: TAssignationDataModule
     Top = 8
   end
   object CancelAssignationQuery: TADOQuery
-    Connection = MainDataModule.PersonnelConnection
+    Connection = MainDataModule.Connection
     Parameters = <
       item
         Name = 'Weekday'
@@ -126,7 +126,7 @@ object AssignationDataModule: TAssignationDataModule
     Top = 8
   end
   object WorkloadQuery: TADOQuery
-    Connection = MainDataModule.PersonnelConnection
+    Connection = MainDataModule.Connection
     Parameters = <
       item
         Name = 'WaiterId'
@@ -145,18 +145,21 @@ object AssignationDataModule: TAssignationDataModule
     Top = 56
   end
   object AlreadyAssignedCheckQuery: TADOQuery
-    Connection = MainDataModule.PersonnelConnection
+    Connection = MainDataModule.Connection
     Parameters = <
       item
         Name = 'Weekday'
+        Size = -1
         Value = Null
       end
       item
         Name = 'Shift'
+        Size = -1
         Value = Null
       end
       item
         Name = 'WaiterId'
+        Size = -1
         Value = Null
       end>
     SQL.Strings = (

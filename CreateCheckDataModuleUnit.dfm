@@ -3,7 +3,7 @@
   Height = 173
   Width = 750
   object OpenCheckQuery: TADOQuery
-    Connection = MainDataModule.SellingsConnection
+    Connection = MainDataModule.Connection
     Parameters = <>
     SQL.Strings = (
       'INSERT INTO '#1063#1077#1082#1080' (['#1044#1072#1090#1072' '#1080' '#1074#1088#1077#1084#1103' '#1086#1092#1086#1088#1084#1083#1077#1085#1080#1103'])'
@@ -13,7 +13,7 @@
   end
   object DishInCheckQuery: TADOQuery
     Active = True
-    Connection = MainDataModule.SellingsConnection
+    Connection = MainDataModule.Connection
     CursorType = ctStatic
     Parameters = <
       item
@@ -46,7 +46,7 @@
     Top = 64
   end
   object OpenedCheckIdQuery: TADOQuery
-    Connection = MainDataModule.SellingsConnection
+    Connection = MainDataModule.Connection
     Parameters = <>
     SQL.Strings = (
       'SELECT @@IDENTITY AS '#1050#1086#1076
@@ -56,7 +56,7 @@
   end
   object DishInCheckTable: TADOTable
     Active = True
-    Connection = MainDataModule.SellingsConnection
+    Connection = MainDataModule.Connection
     CursorType = ctStatic
     TableName = #1041#1083#1102#1076#1086' '#1074' '#1095#1077#1082#1077
     Left = 312
@@ -73,7 +73,7 @@
   end
   object DishesTable: TADOTable
     Active = True
-    Connection = MainDataModule.SellingsConnection
+    Connection = MainDataModule.Connection
     CursorType = ctStatic
     TableName = #1041#1083#1102#1076#1072
     Left = 440
@@ -90,7 +90,7 @@
     Top = 64
   end
   object CancelCheckQuery: TADOQuery
-    Connection = MainDataModule.SellingsConnection
+    Connection = MainDataModule.Connection
     Parameters = <
       item
         Name = #1050#1086#1076#1054#1090#1082#1088#1099#1090#1086#1075#1086#1063#1077#1082#1072
@@ -108,7 +108,7 @@
     Top = 120
   end
   object CheckSummaryQuery: TADOQuery
-    Connection = MainDataModule.SellingsConnection
+    Connection = MainDataModule.Connection
     Parameters = <
       item
         Name = 'CheckId'
@@ -129,7 +129,7 @@
     Top = 16
   end
   object UniquenessQuery: TADOQuery
-    Connection = MainDataModule.SellingsConnection
+    Connection = MainDataModule.Connection
     Parameters = <
       item
         Name = 'CheckId'
@@ -157,7 +157,7 @@
     Top = 16
   end
   object UpdateCountQuery: TADOQuery
-    Connection = MainDataModule.SellingsConnection
+    Connection = MainDataModule.Connection
     Parameters = <
       item
         Name = 'IncrementCount'

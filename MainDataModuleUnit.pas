@@ -7,8 +7,7 @@ uses
 
 type
   TMainDataModule = class(TDataModule)
-    SellingsConnection: TADOConnection;
-    PersonnelConnection: TADOConnection;
+    Connection: TADOConnection;
   private
     { Private declarations }
   public

@@ -9,7 +9,7 @@ object DishesDataModule: TDishesDataModule
   end
   object ShowDishesQuery: TADOQuery
     Active = True
-    Connection = MainDataModule.SellingsConnection
+    Connection = MainDataModule.Connection
     CursorType = ctStatic
     Parameters = <>
     SQL.Strings = (
@@ -19,14 +19,14 @@ object DishesDataModule: TDishesDataModule
     Top = 8
   end
   object DishesQuery: TADOQuery
-    Connection = MainDataModule.SellingsConnection
+    Connection = MainDataModule.Connection
     Parameters = <>
     Left = 272
     Top = 8
   end
   object DishesTable: TADOTable
     Active = True
-    Connection = MainDataModule.SellingsConnection
+    Connection = MainDataModule.Connection
     CursorType = ctStatic
     TableName = #1041#1083#1102#1076#1072
     Left = 176

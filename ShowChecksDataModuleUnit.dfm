@@ -4,7 +4,7 @@ object ShowChecksDataModule: TShowChecksDataModule
   Width = 892
   object ShowChecksQuery: TADOQuery
     Active = True
-    Connection = MainDataModule.SellingsConnection
+    Connection = MainDataModule.Connection
     CursorType = ctStatic
     Parameters = <>
     SQL.Strings = (
@@ -28,7 +28,7 @@ object ShowChecksDataModule: TShowChecksDataModule
     Top = 56
   end
   object CloseCheckQuery: TADOQuery
-    Connection = MainDataModule.SellingsConnection
+    Connection = MainDataModule.Connection
     Parameters = <
       item
         Name = 'CheckId'

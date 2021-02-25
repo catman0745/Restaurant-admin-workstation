@@ -4,7 +4,7 @@
   Width = 382
   object WaitersTable: TADOTable
     Active = True
-    Connection = MainDataModule.PersonnelConnection
+    Connection = MainDataModule.Connection
     CursorType = ctStatic
     TableName = #1055#1077#1088#1089#1086#1085#1072#1083
     Left = 40
@@ -24,7 +24,7 @@
     Top = 56
   end
   object InsertQuery: TADOQuery
-    Connection = MainDataModule.PersonnelConnection
+    Connection = MainDataModule.Connection
     Parameters = <
       item
         Name = 'Name'
@@ -42,7 +42,7 @@
     Top = 8
   end
   object UpdateQuery: TADOQuery
-    Connection = MainDataModule.PersonnelConnection
+    Connection = MainDataModule.Connection
     Parameters = <
       item
         Name = 'Name'
@@ -70,7 +70,7 @@
     Top = 56
   end
   object DeleteQuery: TADOQuery
-    Connection = MainDataModule.PersonnelConnection
+    Connection = MainDataModule.Connection
     Parameters = <
       item
         Name = 'Id'
