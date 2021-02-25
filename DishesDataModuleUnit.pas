@@ -7,11 +7,11 @@ uses
 
 type
   TDishesDataModule = class(TDataModule)
-    ShowDishesDataSource: TDataSource;
-    ShowDishesQuery: TADOQuery;
-    DishesQuery: TADOQuery;
-    DishesTable: TADOTable;
-    DishesDataSource: TDataSource;
+    DisplayQuery: TADOQuery;
+    DisplayDataSource: TDataSource;
+    AddQuery: TADOQuery;
+    UpdateQuery: TADOQuery;
+    DeleteQuery: TADOQuery;
   private
     { Private declarations }
   public

@@ -2,8 +2,8 @@ object DishesForm: TDishesForm
   Left = 0
   Top = 0
   Caption = #1052#1077#1085#1102
-  ClientHeight = 299
-  ClientWidth = 759
+  ClientHeight = 265
+  ClientWidth = 737
   Color = clBtnFace
   Font.Charset = DEFAULT_CHARSET
   Font.Color = clWindowText
@@ -15,44 +15,31 @@ object DishesForm: TDishesForm
   TextHeight = 13
   object Label1: TLabel
     Left = 493
-    Top = 8
-    Width = 148
-    Height = 13
-    Caption = #1056#1077#1078#1080#1084' '#1091#1087#1088#1072#1074#1083#1077#1085#1080#1103' '#1073#1083#1102#1076#1072#1084#1080':'
-  end
-  object Label2: TLabel
-    Left = 493
-    Top = 173
-    Width = 58
-    Height = 13
-    Caption = #1057#1090#1086#1080#1084#1086#1089#1090#1100':'
-  end
-  object Label3: TLabel
-    Left = 493
-    Top = 119
+    Top = 5
     Width = 52
     Height = 13
     Caption = #1053#1072#1079#1074#1072#1085#1080#1077':'
   end
-  object Label4: TLabel
+  object Label2: TLabel
     Left = 493
-    Top = 65
-    Width = 36
+    Top = 51
+    Width = 30
     Height = 13
-    Caption = #1042#1099#1073#1086#1088':'
+    Caption = #1062#1077#1085#1072':'
   end
-  object DBGrid1: TDBGrid
+  object DishesGrid: TDBGrid
     Left = 8
     Top = 8
     Width = 479
     Height = 248
-    DataSource = DishesDataModule.ShowDishesDataSource
+    DataSource = DishesDataModule.DisplayDataSource
     TabOrder = 0
     TitleFont.Charset = DEFAULT_CHARSET
     TitleFont.Color = clWindowText
     TitleFont.Height = -11
     TitleFont.Name = 'Tahoma'
     TitleFont.Style = []
+    OnCellClick = DishesGridCellClick
     Columns = <
       item
         Expanded = False
@@ -65,55 +52,45 @@ object DishesForm: TDishesForm
         Visible = True
       end>
   end
-  object ModeComboBox: TComboBox
+  object NameEdit: TEdit
     Left = 493
-    Top = 27
-    Width = 145
+    Top = 24
+    Width = 236
     Height = 21
-    Style = csDropDownList
     TabOrder = 1
-    OnChange = ModeComboBoxChange
-    Items.Strings = (
-      #1044#1086#1073#1072#1074#1083#1077#1085#1080#1077
-      #1048#1079#1084#1077#1085#1077#1085#1080#1077
-      #1059#1076#1072#1083#1077#1085#1080#1077)
   end
-  object ActionButton: TButton
+  object PriceEdit: TEdit
+    Left = 493
+    Top = 70
+    Width = 236
+    Height = 21
+    TabOrder = 2
+  end
+  object AddButton: TButton
+    Left = 493
+    Top = 169
+    Width = 236
+    Height = 25
+    Caption = #1044#1086#1073#1072#1074#1080#1090#1100' '#1073#1083#1102#1076#1086' '#1074' '#1084#1077#1085#1102
+    TabOrder = 3
+    OnClick = AddButtonClick
+  end
+  object UpdateButton: TButton
+    Left = 493
+    Top = 200
+    Width = 236
+    Height = 25
+    Caption = #1057#1086#1093#1088#1072#1085#1080#1090#1100' '#1080#1079#1084#1077#1085#1077#1085#1080#1103' '#1074#1099#1076#1077#1083#1077#1085#1085#1086#1075#1086' '#1073#1083#1102#1076#1072
+    TabOrder = 4
+    OnClick = UpdateButtonClick
+  end
+  object DeleteButton: TButton
     Left = 493
     Top = 231
-    Width = 145
+    Width = 236
     Height = 25
-    TabOrder = 2
-    Visible = False
-    OnClick = ActionButtonClick
-  end
-  object DishPriceEdit: TEdit
-    Left = 493
-    Top = 192
-    Width = 145
-    Height = 21
-    BiDiMode = bdLeftToRight
-    Enabled = False
-    ParentBiDiMode = False
-    TabOrder = 3
-  end
-  object DishNameEdit: TEdit
-    Left = 493
-    Top = 138
-    Width = 145
-    Height = 21
-    Enabled = False
-    TabOrder = 4
-  end
-  object DishIdLookupComboBox: TDBLookupComboBox
-    Left = 493
-    Top = 84
-    Width = 145
-    Height = 21
-    Enabled = False
-    KeyField = #1050#1086#1076
-    ListField = #1053#1072#1079#1074#1072#1085#1080#1077
-    ListSource = DishesDataModule.DishesDataSource
+    Caption = #1059#1076#1072#1083#1080#1090#1100' '#1074#1099#1076#1077#1083#1077#1085#1085#1086#1077' '#1073#1083#1102#1076#1086
     TabOrder = 5
+    OnClick = DeleteButtonClick
   end
 end

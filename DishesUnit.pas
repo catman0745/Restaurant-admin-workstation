@@ -9,27 +9,22 @@ uses
 
 type
   TDishesForm = class(TForm)
-    DBGrid1: TDBGrid;
-    ModeComboBox: TComboBox;
+    DishesGrid: TDBGrid;
+    NameEdit: TEdit;
     Label1: TLabel;
-    ActionButton: TButton;
-    DishPriceEdit: TEdit;
+    PriceEdit: TEdit;
     Label2: TLabel;
-    DishNameEdit: TEdit;
-    Label3: TLabel;
-    DishIdLookupComboBox: TDBLookupComboBox;
-    Label4: TLabel;
-    procedure ModeComboBoxChange(Sender: TObject);
-    procedure ActionButtonClick(Sender: TObject);
-    procedure AddMode();
-    procedure EditMode();
-    procedure DeleteMode();
-    procedure AddDish();
-    procedure UpdateDish();
-    procedure DeleteDish();
-    function IsUniqueName(name: String; exceptionId: Integer): Boolean;
-    procedure RefreshDishesList();
-    function IsFloat(input: string): Boolean;
+    AddButton: TButton;
+    UpdateButton: TButton;
+    DeleteButton: TButton;
+    procedure Refresh();
+    procedure FillForm();
+    function ValidateName(): Boolean;
+    function ValidatePrice(): Boolean;
+    procedure AddButtonClick(Sender: TObject);
+    procedure DeleteButtonClick(Sender: TObject);
+    procedure DishesGridCellClick(Column: TColumn);
+    procedure UpdateButtonClick(Sender: TObject);
   private
     { Private declarations }
   public
@@ -38,6 +33,7 @@ type
 
 var
   DishesForm: TDishesForm;
+  SelectedDishId: Integer;
 
 implementation
 
@@ -45,61 +41,7 @@ implementation
 
 uses DishesDataModuleUnit;
 
-procedure TDishesForm.AddMode();
-begin
-  DishIdLookupComboBox.Enabled := false;
-  DishIdLookupComboBox.KeyValue := null;
-
-  DishNameEdit.Enabled := true;
-  DishNameEdit.Text := '';
-
-  DishPriceEdit.Enabled := true;
-  DishPriceEdit.Text := '';
-
-  ActionButton.Visible := true;
-  ActionButton.Caption := 'Добавить блюдо';
-end;
-
-procedure TDishesForm.EditMode();
-begin
-  DishIdLookupComboBox.Enabled := true;
-  DishIdLookupComboBox.KeyValue := null;
-
-  DishNameEdit.Enabled := true;
-  DishNameEdit.Text := '';
-
-  DishPriceEdit.Enabled := true;
-  DishPriceEdit.Text := '';
-
-  ActionButton.Visible := true;
-  ActionButton.Caption := 'Сохранить изменения';
-end;
-
-procedure TDishesForm.DeleteMode();
-begin
-  DishIdLookupComboBox.Enabled := true;
-  DishIdLookupComboBox.KeyValue := null;
-
-  DishNameEdit.Enabled := false;
-  DishNameEdit.Text := '';
-
-  DishPriceEdit.Enabled := false;
-  DishPriceEdit.Text := '';
-
-  ActionButton.Visible := true;
-  ActionButton.Caption := 'Удалить блюдо';
-end;
-
-procedure TDishesForm.RefreshDishesList();
-begin
-  DishesDataModule.ShowDishesQuery.Active := false;
-  DishesDataModule.ShowDishesQuery.Active := true;
-
-  DishesDataModule.DishesTable.Active := false;
-  DishesDataModule.DishesTable.Active := true;
-end;
-
-function TDishesForm.IsFloat(input: string): Boolean;
+function IsFloat(input: string): Boolean;
 begin
   IsFloat := true;
   try
@@ -109,152 +51,127 @@ begin
   end;
 end;
 
-function TDishesForm.IsUniqueName(name: String; exceptionId: Integer): Boolean;
+procedure TDishesForm.Refresh();
 begin
-  DishesDataModule.DishesQuery.SQL.Clear;
-
-  DishesDataModule.DishesQuery.SQL.Add('SELECT Count(*) AS [Количество блюд с таким названием]');
-  DishesDataModule.DishesQuery.SQL.Add('FROM Блюда');
-  DishesDataModule.DishesQuery.SQL.Add('WHERE Название = :Name AND Код <> :ExceptionId');
-
-  DishesDataModule.DishesQuery.Parameters.ParamByName('Name').Value := name;
-  DishesDataModule.DishesQuery.Parameters.ParamByName('ExceptionId').Value := exceptionId;
-
-  DishesDataModule.DishesQuery.Open;
-
-  IsUniqueName := DishesDataModule.DishesQuery.Fields.FieldByName('Количество блюд с таким названием').AsInteger = 0;
-
-  DishesDataModule.DishesQuery.Close;
+  DishesDataModule.DisplayQuery.Active := false;
+  DishesDataModule.DisplayQuery.Active := true;
 end;
 
-procedure TDishesForm.AddDish();
+procedure TDishesForm.FillForm();
+var
+  name: String;
+  price: Real;
 begin
-  if DishNameEdit.GetTextLen = 0 then
+  SelectedDishId := DishesDataModule.DisplayDataSource.DataSet.Fields[0].AsInteger;
+  name := DishesDataModule.DisplayDataSource.DataSet.Fields[1].AsString;
+  price := DishesDataModule.DisplayDataSource.DataSet.Fields[2].AsCurrency;
+
+  NameEdit.Text := name;
+  PriceEdit.Text := floatToStr(price);
+end;
+
+function TDishesForm.ValidateName(): Boolean;
+var
+  name: String;
+begin
+  name := NameEdit.Text;
+
+  if name.Length = 0 then
     begin
       ShowMessage('Введите название блюда');
-      exit;
-    end;
-  if not IsUniqueName(DishNameEdit.Text, -1) then
-    begin
-      ShowMessage('Блюдо с таким названием уже есть в меню');
+      ValidateName := false;
       exit;
     end;
 
-  if DishPriceEdit.GetTextLen = 0 then
+  ValidateName := true;
+end;
+
+function TDishesForm.ValidatePrice(): Boolean;
+var
+  price: Real;
+begin
+  if PriceEdit.GetTextLen = 0 then
     begin
       ShowMessage('Введите цену блюда');
+      ValidatePrice := false;
       exit;
     end;
-  if not IsFloat(DishPriceEdit.Text) then
+
+
+  if not IsFloat(PriceEdit.Text) then
     begin
       ShowMessage('Цена блюда должна быть числом');
+      ValidatePrice := false;
       exit;
     end;
-  if StrToFloat(DishPriceEdit.Text) < 0 then
+
+  price := strToFloat(PriceEdit.Text);
+
+  if price <= 0 then
     begin
-      ShowMessage('Цена блюда не может быть отрицательной');
+      ShowMessage('Цена блюда должна быть больше 0');
+      ValidatePrice := false;
       exit;
     end;
 
-  DishesDataModule.DishesQuery.SQL.Clear;
-
-  DishesDataModule.DishesQuery.SQL.Add('INSERT INTO Блюда(Название, Цена)');
-  DishesDataModule.DishesQuery.SQL.Add('VALUES(:Name, :Price)');
-
-  DishesDataModule.DishesQuery.Parameters.ParamByName('Name').Value := DishNameEdit.Text;
-  DishesDataModule.DishesQuery.Parameters.ParamByName('Price').Value := DishPriceedit.Text;
-
-  DishesDataModule.DishesQuery.ExecSQl;
-
-  RefreshDishesList;
+  ValidatePrice := true;
 end;
 
-procedure TDishesForm.UpdateDish();
+procedure TDishesForm.AddButtonClick(Sender: TObject);
+var
+  name: String;
+  price: Real;
 begin
-  if DishIdLookupComboBox.KeyValue = null then
-    begin
-      ShowMessage('Выберите блюдо');
-      exit;
-    end;
+  if not (ValidateName AND ValidatePrice) then
+    exit;
 
-  if DishNameEdit.GetTextLen = 0 then
-    begin
-      ShowMessage('Введите название блюда');
-      exit;
-    end;
-  if not IsUniqueName(DishNameEdit.Text, DishIdLookupComboBox.KeyValue) then
-    begin
-      ShowMessage('Блюдо с таким названием уже есть в меню');
-      exit;
-    end;
+  name := NameEdit.Text;
+  price := strToFloat(PriceEdit.Text);
 
-  if DishPriceEdit.GetTextLen = 0 then
-    begin
-      ShowMessage('Введите цену блюда');
-      exit;
-    end;
-  if not IsFloat(DishPriceEdit.Text) then
-    begin
-      ShowMessage('Цена блюда должна быть числом');
-      exit;
-    end;
-  if StrToFloat(DishPriceEdit.Text) < 0 then
-    begin
-      ShowMessage('Цена блюда не может быть отрицательной');
-      exit;
-    end;
+  DishesDataModule.AddQuery.Parameters.ParamByName('Name').Value := name;
+  DishesDataModule.AddQuery.Parameters.ParamByName('Price').Value := price;
 
-  DishesDataModule.DishesQuery.SQL.Clear;
+  DishesDataModule.AddQuery.ExecSQL;
 
-  DishesDataModule.DishesQuery.SQL.Add('UPDATE Блюда');
-  DishesDataModule.DishesQuery.SQL.Add('SET Название = :Name, Цена = :Price');
-  DishesDataModule.DishesQuery.SQL.Add('WHERE Код = :Id');
-
-  DishesDataModule.DishesQuery.Parameters.ParamByName('Name').Value := DishNameEdit.Text;
-  DishesDataModule.DishesQuery.Parameters.ParamByName('Price').Value := DishPriceedit.Text;
-  DishesDataModule.DishesQuery.Parameters.ParamByName('Id').Value := DishIdLookupComboBox.KeyValue;
-
-  DishesDataModule.DishesQuery.ExecSQl;
-
-  RefreshDishesList;
+  Refresh;
 end;
 
-procedure TDishesForm.DeleteDish();
+procedure TDishesForm.UpdateButtonClick(Sender: TObject);
+var
+  name: String;
+  price: Real;
 begin
-  if DishIdLookupComboBox.KeyValue = null then
-    begin
-      ShowMessage('Выберите блюдо');
-      exit;
-    end;
+  if not (ValidateName AND ValidatePrice) then
+    exit;
 
-  DishesDataModule.DishesQuery.SQL.Clear;
+  name := NameEdit.Text;
+  price := strToFloat(PriceEdit.Text);
 
-  DishesDataModule.DishesQuery.SQL.Add('DELETE FROM Блюда');
-  DishesDataModule.DishesQuery.SQL.Add('WHERE Код = :Id');
+  DishesDataModule.UpdateQuery.Parameters.ParamByName('Id').Value := SelectedDishId;
+  DishesDataModule.UpdateQuery.Parameters.ParamByName('Name').Value := name;
+  DishesDataModule.UpdateQuery.Parameters.ParamByName('Price').Value := price;
 
-  DishesDataModule.DishesQuery.Parameters.ParamByName('Id').Value := DishIdLookupComboBox.KeyValue;
+  DishesDataModule.UpdateQuery.ExecSQL;
 
-  DishesDataModule.DishesQuery.ExecSQl;
-
-  RefreshDishesList;
+  Refresh;
 end;
 
-procedure TDishesForm.ActionButtonClick(Sender: TObject);
+procedure TDishesForm.DeleteButtonClick(Sender: TObject);
+var
+  id: Integer;
 begin
-  case ModeComboBox.ItemIndex of
-    0: AddDish();
-    1: UpdateDish();
-    2: DeleteDish();
-  end;
+  id := DishesDataModule.DisplayDataSource.DataSet.Fields[0].AsInteger;
+
+  DishesDataModule.DeleteQuery.Parameters.ParamByName('Id').Value := id;
+
+  DishesDataModule.DeleteQuery.ExecSQL;
+
+  Refresh;
 end;
 
-procedure TDishesForm.ModeComboBoxChange(Sender: TObject);
+procedure TDishesForm.DishesGridCellClick(Column: TColumn);
 begin
-  case ModeComboBox.ItemIndex of
-    0: AddMode();
-    1: EditMode();
-    2: DeleteMode();
-  end;
+  FillForm;
 end;
 
 end.
