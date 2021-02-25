@@ -40,6 +40,7 @@ object AssignationForm: TAssignationForm
     Width = 385
     Height = 283
     DataSource = AssignationDataModule.ShowAssignationsDataSource
+    ReadOnly = True
     TabOrder = 0
     TitleFont.Charset = DEFAULT_CHARSET
     TitleFont.Color = clWindowText

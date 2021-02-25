@@ -27,6 +27,7 @@ object ShowChecksForm: TShowChecksForm
     Width = 353
     Height = 283
     DataSource = ShowChecksDataModule.ShowChecksDataSource
+    ReadOnly = True
     TabOrder = 0
     TitleFont.Charset = DEFAULT_CHARSET
     TitleFont.Color = clWindowText

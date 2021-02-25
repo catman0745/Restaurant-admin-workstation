@@ -26,6 +26,7 @@ object WaitersForm: TWaitersForm
     Width = 320
     Height = 283
     DataSource = WaitersDataModule.DisplayDataSource
+    ReadOnly = True
     TabOrder = 0
     TitleFont.Charset = DEFAULT_CHARSET
     TitleFont.Color = clWindowText

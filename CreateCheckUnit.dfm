@@ -58,6 +58,7 @@ object CreateCheckForm: TCreateCheckForm
     Width = 409
     Height = 207
     DataSource = CreateCheckDataModule.DishInCheckDataSource
+    ReadOnly = True
     TabOrder = 1
     TitleFont.Charset = DEFAULT_CHARSET
     TitleFont.Color = clWindowText

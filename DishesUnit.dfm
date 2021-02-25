@@ -33,6 +33,7 @@ object DishesForm: TDishesForm
     Width = 479
     Height = 248
     DataSource = DishesDataModule.DisplayDataSource
+    ReadOnly = True
     TabOrder = 0
     TitleFont.Charset = DEFAULT_CHARSET
     TitleFont.Color = clWindowText
