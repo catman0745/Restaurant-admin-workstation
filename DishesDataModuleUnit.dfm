@@ -43,7 +43,7 @@ object DishesDataModule: TDishesDataModule
     SQL.Strings = (
       'INSERT INTO '#1041#1083#1102#1076#1072'('#1053#1072#1079#1074#1072#1085#1080#1077', '#1062#1077#1085#1072')'
       'VALUES (:Name, :Price)')
-    Left = 512
+    Left = 216
     Top = 8
   end
   object UpdateQuery: TADOQuery
@@ -82,7 +82,7 @@ object DishesDataModule: TDishesDataModule
       '       '#1062#1077#1085#1072' = :Price'
       'WHERE '#1050#1086#1076' = :Id'
       '')
-    Left = 512
+    Left = 216
     Top = 56
   end
   object DeleteQuery: TADOQuery
@@ -100,7 +100,26 @@ object DishesDataModule: TDishesDataModule
     SQL.Strings = (
       'DELETE FROM '#1041#1083#1102#1076#1072
       'WHERE '#1050#1086#1076' = :Id')
-    Left = 512
+    Left = 216
     Top = 104
+  end
+  object NameAvailabilityCheckQuery: TADOQuery
+    Connection = MainDataModule.Connection
+    Parameters = <
+      item
+        Name = 'Name'
+        Attributes = [paNullable]
+        DataType = ftWideString
+        NumericScale = 255
+        Precision = 255
+        Size = 510
+        Value = Null
+      end>
+    SQL.Strings = (
+      'SELECT (Count(*) = 0) AS ['#1053#1072#1079#1074#1072#1085#1080#1077' '#1089#1074#1086#1073#1086#1076#1085#1086']'
+      'FROM '#1041#1083#1102#1076#1072
+      'WHERE '#1053#1072#1079#1074#1072#1085#1080#1077' = :Name')
+    Left = 328
+    Top = 8
   end
 end

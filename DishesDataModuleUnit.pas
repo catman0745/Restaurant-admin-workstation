@@ -12,6 +12,7 @@ type
     AddQuery: TADOQuery;
     UpdateQuery: TADOQuery;
     DeleteQuery: TADOQuery;
+    NameAvailabilityCheckQuery: TADOQuery;
   private
     { Private declarations }
   public

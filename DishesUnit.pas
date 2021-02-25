@@ -20,6 +20,7 @@ type
     procedure Refresh();
     procedure FillForm();
     function ValidateName(): Boolean;
+    function NameAvailable(exceptionDishId: Integer): Boolean;
     function ValidatePrice(): Boolean;
     procedure AddButtonClick(Sender: TObject);
     procedure DeleteButtonClick(Sender: TObject);
@@ -86,6 +87,26 @@ begin
   ValidateName := true;
 end;
 
+function TDishesForm.NameAvailable(exceptionDishId: Integer): Boolean;
+var
+  name: String;
+  available: Boolean;
+begin
+  name := NameEdit.Text;
+
+  DishesDataModule.NameAvailabilityCheckQuery.Parameters.ParamByName('Name').Value := name;
+  DishesDataModule.NameAvailabilityCheckQuery.Open;
+
+  available := DishesDataModule.NameAvailabilityCheckQuery.Fields.FieldByName('Название свободно').AsInteger = 1;
+
+  DishesDataModule.NameAvailabilityCheckQuery.Close;
+
+  if not available then
+      ShowMessage('Блюдо с таким названием уже есть в меню');
+
+  NameAvailable := available;
+end;
+
 function TDishesForm.ValidatePrice(): Boolean;
 var
   price: Real;
@@ -122,7 +143,7 @@ var
   name: String;
   price: Real;
 begin
-  if not (ValidateName AND ValidatePrice) then
+  if not (ValidateName AND NameAvailable(-1) AND ValidatePrice) then
     exit;
 
   name := NameEdit.Text;
@@ -141,7 +162,7 @@ var
   name: String;
   price: Real;
 begin
-  if not (ValidateName AND ValidatePrice) then
+  if not (ValidateName AND NameAvailable(SelectedDishId) AND ValidatePrice) then
     exit;
 
   name := NameEdit.Text;
