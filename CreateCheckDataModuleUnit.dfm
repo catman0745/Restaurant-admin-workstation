@@ -1,13 +1,22 @@
 ﻿object CreateCheckDataModule: TCreateCheckDataModule
   OldCreateOrder = False
-  Height = 173
+  Height = 345
   Width = 750
   object OpenCheckQuery: TADOQuery
     Connection = MainDataModule.Connection
-    Parameters = <>
+    Parameters = <
+      item
+        Name = 'TableId'
+        Attributes = [paNullable]
+        DataType = ftWideString
+        NumericScale = 255
+        Precision = 255
+        Size = 510
+        Value = Null
+      end>
     SQL.Strings = (
-      'INSERT INTO '#1063#1077#1082#1080' (['#1044#1072#1090#1072' '#1080' '#1074#1088#1077#1084#1103' '#1086#1092#1086#1088#1084#1083#1077#1085#1080#1103'])'
-      'VALUES (NOW())')
+      'INSERT INTO '#1063#1077#1082#1080' ('#1057#1090#1086#1083#1080#1082')'
+      'VALUES (:TableId)')
     Left = 48
     Top = 16
   end
@@ -193,5 +202,24 @@
       '     AND '#1063#1077#1082' = :CheckId')
     Left = 672
     Top = 64
+  end
+  object TableExistsQuery: TADOQuery
+    Connection = MainDataModule.Connection
+    Parameters = <
+      item
+        Name = 'Id'
+        Attributes = [paNullable]
+        DataType = ftWideString
+        NumericScale = 255
+        Precision = 255
+        Size = 510
+        Value = Null
+      end>
+    SQL.Strings = (
+      'SELECT Count(*) AS ['#1050#1086#1083#1080#1095#1077#1089#1090#1074#1086' '#1089#1090#1086#1083#1080#1082#1086#1074']'
+      'FROM '#1057#1090#1086#1083#1080#1082#1080
+      'WHERE '#1053#1086#1084#1077#1088' = :Id')
+    Left = 48
+    Top = 168
   end
 end

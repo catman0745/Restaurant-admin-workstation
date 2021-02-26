@@ -24,6 +24,7 @@ type
     CheckSummaryQuery: TADOQuery;
     UniquenessQuery: TADOQuery;
     UpdateCountQuery: TADOQuery;
+    TableExistsQuery: TADOQuery;
   private
     { Private declarations }
   public

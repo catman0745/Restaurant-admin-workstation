@@ -22,6 +22,7 @@ type
     CancelButton: TButton;
     CheckSummaryEdit: TEdit;
     CheckSummaryLabel: TLabel;
+    function ValidateTableId(tableIdInput: String; out validTableId: Integer): Boolean;
     procedure OpenCheckButtonClick(Sender: TObject);
     procedure AddDishButtonClick(Sender: TObject);
     procedure SaveCheckButtonClick(Sender: TObject);
@@ -48,6 +49,20 @@ implementation
 {$R *.dfm}
 
 uses CreateCheckDataModuleUnit;
+
+function IsNonNegativeInteger(num: string): Boolean;
+var
+  i: Integer;
+begin
+  for i := 1 to length(num) do
+    if not (CharInSet(num[i], ['0'..'9'])) then
+      begin
+        IsNonNegativeInteger := false;
+        exit;
+      end;
+
+  IsNonNegativeInteger := true;
+end;
 
 procedure TCreateCheckForm.RefreshList();
 begin
@@ -149,24 +164,64 @@ begin
   LockForm;
 end;
 
-procedure TCreateCheckForm.OpenCheckButtonClick(Sender: TObject);
+function TCreateCheckForm.ValidateTableId(tableIdInput: String; out validTableId: Integer): Boolean;
+var
+  tableExists: Boolean;
 begin
-  if (not IsCheckOpened) then
+  if not IsNonNegativeInteger(tableIdInput) then
     begin
-      CreateCheckDataModule.OpenCheckQuery.ExecSQL;
-      IsCheckOpened := True;
+      ShowMessage('Нет столика под номером "' + tableIdInput + '"');
+      ValidateTableId := false;
+      exit;
+    end;
+  validTableId := strToInt(tableIdInput);
 
-      CreateCheckDataModule.OpenedCheckIdQuery.Open();
-      OpenedCheckId := CreateCheckDataModule.OpenedCheckIdQuery.FieldByName('Код').AsInteger;
-      CreateCheckDataModule.OpenedCheckIdQuery.Close();
+  CreateCheckDataModule.TableExistsQuery.Parameters.ParamByName('Id').Value := validTableId;
+  CreateCheckDataModule.TableExistsQuery.Open;
 
-      CreateCheckDataModule.DishInCheckQuery.Parameters.ParamByName('КодОткрытогоЧека').Value := OpenedCheckId;
-      CreateCheckdataModule.DishInCheckQuery.Active := true;
+  tableExists := CreateCheckDataModule.TableExistsQuery.Fields.FieldByName('Количество столиков').AsInteger > 0;
 
-      UnlockForm;
-    end
-  else
-    ShowMessage('Чек уже открыт');
+  CreateCheckDataModule.TableExistsQuery.Close;
+
+  if not tableExists then
+    begin
+      ShowMessage('Нет столика под номером "' + tableIdInput + '"');
+      ValidateTableId := false;
+      exit;
+    end;
+
+  ValidateTableId := true;
+end;
+
+procedure TCreateCheckForm.OpenCheckButtonClick(Sender: TObject);
+var
+  tableId: Integer;
+  tableIdInput: String;
+  tableIdConfirmed: Boolean;
+begin
+  if IsCheckOpened then
+    begin
+      ShowMessage('Чек уже открыт');
+      exit;
+    end;
+
+  tableIdConfirmed := InputQuery('Открытие чека на столик', 'Номер столика:', tableIdInput);
+  if not (tableIdConfirmed AND ValidateTableId(tableIdInput, tableId)) then
+    exit;
+
+  CreateCheckDataModule.OpenCheckQuery.Parameters.ParamByName('TableId').Value := tableId;
+
+  CreateCheckDataModule.OpenCheckQuery.ExecSQL;
+  IsCheckOpened := True;
+
+  CreateCheckDataModule.OpenedCheckIdQuery.Open();
+  OpenedCheckId := CreateCheckDataModule.OpenedCheckIdQuery.FieldByName('Код').AsInteger;
+  CreateCheckDataModule.OpenedCheckIdQuery.Close();
+
+  CreateCheckDataModule.DishInCheckQuery.Parameters.ParamByName('КодОткрытогоЧека').Value := OpenedCheckId;
+  CreateCheckdataModule.DishInCheckQuery.Active := true;
+
+  UnlockForm;
 end;
 
 procedure TCreateCheckForm.SaveCheckButtonClick(Sender: TObject);

@@ -8,6 +8,12 @@ uses
 type
   TMainDataModule = class(TDataModule)
     Connection: TADOConnection;
+    DisplayTablesQuery: TADOQuery;
+    DisplayTablesDataSource: TDataSource;
+    ReserveTableQuery: TADOQuery;
+    OccupyTableQuery: TADOQuery;
+    EmptyTableQuery: TADOQuery;
+    TableStatusQuery: TADOQuery;
   private
     { Private declarations }
   public
