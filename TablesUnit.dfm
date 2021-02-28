@@ -27,6 +27,7 @@ object TablesForm: TTablesForm
     Width = 113
     Height = 283
     DataSource = TablesDataModule.TablesDataSource
+    ReadOnly = True
     TabOrder = 0
     TitleFont.Charset = DEFAULT_CHARSET
     TitleFont.Color = clWindowText
