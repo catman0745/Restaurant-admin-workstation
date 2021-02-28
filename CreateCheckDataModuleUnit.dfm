@@ -203,23 +203,17 @@
     Left = 672
     Top = 64
   end
-  object TableExistsQuery: TADOQuery
+  object TablesTable: TADOTable
+    Active = True
     Connection = MainDataModule.Connection
-    Parameters = <
-      item
-        Name = 'Id'
-        Attributes = [paNullable]
-        DataType = ftWideString
-        NumericScale = 255
-        Precision = 255
-        Size = 510
-        Value = Null
-      end>
-    SQL.Strings = (
-      'SELECT Count(*) AS ['#1050#1086#1083#1080#1095#1077#1089#1090#1074#1086' '#1089#1090#1086#1083#1080#1082#1086#1074']'
-      'FROM '#1057#1090#1086#1083#1080#1082#1080
-      'WHERE '#1053#1086#1084#1077#1088' = :Id')
-    Left = 48
-    Top = 168
+    CursorType = ctStatic
+    TableName = #1057#1090#1086#1083#1080#1082#1080
+    Left = 480
+    Top = 200
+  end
+  object TablesDataSource: TDataSource
+    DataSet = TablesTable
+    Left = 480
+    Top = 248
   end
 end

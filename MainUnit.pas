@@ -19,13 +19,14 @@ type
     TableIsOccupiedButton: TButton;
     TableIsEmptyButton: TButton;
     procedure RefreshTablesList();
+    function SelectedTableId(): Integer;
+    function SelectedTableNumber(): Integer;
     function TableStatus(tableId: Integer): String;
     procedure RegisterNewCheckButtonClick(Sender: TObject);
     procedure ManageDishesButtonClick(Sender: TObject);
     procedure ShowCkecksButtonClick(Sender: TObject);
     procedure WaitersButtonClick(Sender: TObject);
     procedure AssignationsButtonClick(Sender: TObject);
-    procedure TablesDisplayGridCellClick(Column: TColumn);
     procedure ReserveTableButtonClick(Sender: TObject);
     procedure TableIsOccupiedButtonClick(Sender: TObject);
     procedure TableIsEmptyButtonClick(Sender: TObject);
@@ -37,7 +38,6 @@ type
 
 var
   MainForm: TMainForm;
-  SelectedTableId: Integer;
 
 implementation
 
@@ -104,6 +104,16 @@ begin
   MainDataModule.DisplayTablesQuery.Active := true;
 end;
 
+function TMainForm.SelectedTableId(): Integer;
+begin
+  SelectedTableId := MainDataModule.DisplayTablesDataSource.DataSet.Fields[0].AsInteger;
+end;
+
+function TMainForm.SelectedTableNumber(): Integer;
+begin
+  SelectedTableNumber := MainDataModule.DisplayTablesDataSource.DataSet.Fields[1].AsInteger;
+end;
+
 function TMainForm.TableStatus(tableId: Integer): String;
 begin
   MainDataModule.TableStatusQuery.Parameters.ParamByName('Id').Value := tableId;
@@ -122,12 +132,12 @@ begin
   status := TableStatus(SelectedTableId);
   if status = 'Зарезервирован' then
     begin
-      ShowMessage('Столик №' + intToStr(SelectedTableId) + ' уже зарезервирован');
+      ShowMessage('Столик №' + intToStr(SelectedTableNumber) + ' уже зарезервирован');
       exit;
     end
   else if status = 'Занят' then
     begin
-      ShowMessage('Столик №' + intToStr(SelectedTableId) + ' уже занят');
+      ShowMessage('Столик №' + intToStr(SelectedTableNumber) + ' уже занят');
       exit;
     end;
 
@@ -142,14 +152,14 @@ begin
   MainDataModule.ReserveTableQuery.ExecSQL;
   RefreshTablesList;
 
-  ShowMessage('Столик №' + intToStr(SelectedTableId) + ' зарезервирован на ' + time);
+  ShowMessage('Столик №' + intToStr(SelectedTableNumber) + ' зарезервирован на ' + time);
 end;
 
 procedure TMainForm.TableIsOccupiedButtonClick(Sender: TObject);
 begin
   if TableStatus(SelectedTableId) = 'Занят' then
     begin
-      ShowMessage('Столик №' + intToStr(SelectedTableId) + ' уже занят');
+      ShowMessage('Столик №' + intToStr(SelectedTableNumber) + ' уже занят');
       exit;
     end;
 
@@ -165,11 +175,6 @@ begin
 
   MainDataModule.EmptyTableQuery.ExecSQL;
   RefreshTablesList;
-end;
-
-procedure TMainForm.TablesDisplayGridCellClick(Column: TColumn);
-begin
-  SelectedTableId := MainDataModule.DisplayTablesDataSource.DataSet.Fields[0].AsInteger;
 end;
 
 procedure TMainForm.AssignationsButtonClick(Sender: TObject);

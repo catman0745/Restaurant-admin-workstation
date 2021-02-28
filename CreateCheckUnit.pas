@@ -22,7 +22,8 @@ type
     CancelButton: TButton;
     CheckSummaryEdit: TEdit;
     CheckSummaryLabel: TLabel;
-    function ValidateTableId(tableIdInput: String; out validTableId: Integer): Boolean;
+    TableIdDBLookupComboBox: TDBLookupComboBox;
+    Label3: TLabel;
     procedure OpenCheckButtonClick(Sender: TObject);
     procedure AddDishButtonClick(Sender: TObject);
     procedure SaveCheckButtonClick(Sender: TObject);
@@ -74,6 +75,7 @@ procedure TCreateCheckForm.ResetState();
 begin
   OpenedCheckId := 0;
   IsCheckOpened := False;
+  TableIdDBLookupComboBox.ReadOnly := False;
   CreateCheckdataModule.DishInCheckQuery.Active := false;
   DishIdDBLookupComboBox.KeyValue := null;
   CountDBEdit.Text := '';
@@ -164,55 +166,24 @@ begin
   LockForm;
 end;
 
-function TCreateCheckForm.ValidateTableId(tableIdInput: String; out validTableId: Integer): Boolean;
-var
-  tableExists: Boolean;
-begin
-  if not IsNonNegativeInteger(tableIdInput) then
-    begin
-      ShowMessage('Нет столика под номером "' + tableIdInput + '"');
-      ValidateTableId := false;
-      exit;
-    end;
-  validTableId := strToInt(tableIdInput);
-
-  CreateCheckDataModule.TableExistsQuery.Parameters.ParamByName('Id').Value := validTableId;
-  CreateCheckDataModule.TableExistsQuery.Open;
-
-  tableExists := CreateCheckDataModule.TableExistsQuery.Fields.FieldByName('Количество столиков').AsInteger > 0;
-
-  CreateCheckDataModule.TableExistsQuery.Close;
-
-  if not tableExists then
-    begin
-      ShowMessage('Нет столика под номером "' + tableIdInput + '"');
-      ValidateTableId := false;
-      exit;
-    end;
-
-  ValidateTableId := true;
-end;
-
 procedure TCreateCheckForm.OpenCheckButtonClick(Sender: TObject);
-var
-  tableId: Integer;
-  tableIdInput: String;
-  tableIdConfirmed: Boolean;
 begin
   if IsCheckOpened then
     begin
       ShowMessage('Чек уже открыт');
       exit;
     end;
+  if TableIdDBLookupComboBox.KeyValue = null then
+    begin
+      ShowMessage('Укажите номер столика');
+      exit;
+    end;
 
-  tableIdConfirmed := InputQuery('Открытие чека на столик', 'Номер столика:', tableIdInput);
-  if not (tableIdConfirmed AND ValidateTableId(tableIdInput, tableId)) then
-    exit;
-
-  CreateCheckDataModule.OpenCheckQuery.Parameters.ParamByName('TableId').Value := tableId;
+  CreateCheckDataModule.OpenCheckQuery.Parameters.ParamByName('TableId').Value := TableIdDBLookupComboBox.KeyValue;
 
   CreateCheckDataModule.OpenCheckQuery.ExecSQL;
   IsCheckOpened := True;
+  TableIdDBLookupComboBox.ReadOnly := True;
 
   CreateCheckDataModule.OpenedCheckIdQuery.Open();
   OpenedCheckId := CreateCheckDataModule.OpenedCheckIdQuery.FieldByName('Код').AsInteger;

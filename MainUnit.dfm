@@ -71,7 +71,6 @@ object MainForm: TMainForm
     TitleFont.Height = -11
     TitleFont.Name = 'Tahoma'
     TitleFont.Style = []
-    OnCellClick = TablesDisplayGridCellClick
     Columns = <
       item
         Expanded = False
