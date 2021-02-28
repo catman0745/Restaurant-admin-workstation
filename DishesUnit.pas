@@ -95,16 +95,20 @@ begin
   name := NameEdit.Text;
 
   DishesDataModule.NameAvailabilityCheckQuery.Parameters.ParamByName('Name').Value := name;
+  DishesDataModule.NameAvailabilityCheckQuery.Parameters.ParamByName('ExceptionId').Value := exceptionDishId;
   DishesDataModule.NameAvailabilityCheckQuery.Open;
 
-  available := DishesDataModule.NameAvailabilityCheckQuery.Fields.FieldByName('Название свободно').AsInteger = 1;
+  available := DishesDataModule.NameAvailabilityCheckQuery.Fields.FieldByName('Количество блюд с таким названием').AsInteger = 0;
 
   DishesDataModule.NameAvailabilityCheckQuery.Close;
 
-  if not available then
+  if available then
+    NameAvailable := True
+  else
+    begin
       ShowMessage('Блюдо с таким названием уже есть в меню');
-
-  NameAvailable := available;
+      NameAvailable := False;
+    end;
 end;
 
 function TDishesForm.ValidatePrice(): Boolean;

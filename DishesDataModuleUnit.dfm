@@ -114,11 +114,21 @@ object DishesDataModule: TDishesDataModule
         Precision = 255
         Size = 510
         Value = Null
+      end
+      item
+        Name = 'ExceptionId'
+        Attributes = [paNullable]
+        DataType = ftWideString
+        NumericScale = 255
+        Precision = 255
+        Size = 510
+        Value = Null
       end>
     SQL.Strings = (
-      'SELECT (Count(*) = 0) AS ['#1053#1072#1079#1074#1072#1085#1080#1077' '#1089#1074#1086#1073#1086#1076#1085#1086']'
+      'SELECT Count(*) AS ['#1050#1086#1083#1080#1095#1077#1089#1090#1074#1086' '#1073#1083#1102#1076' '#1089' '#1090#1072#1082#1080#1084' '#1085#1072#1079#1074#1072#1085#1080#1077#1084']'
       'FROM '#1041#1083#1102#1076#1072
-      'WHERE '#1053#1072#1079#1074#1072#1085#1080#1077' = :Name')
+      'WHERE '#1053#1072#1079#1074#1072#1085#1080#1077' = :Name'
+      '     AND '#1050#1086#1076' <> :ExceptionId')
     Left = 328
     Top = 8
   end
