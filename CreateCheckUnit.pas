@@ -24,6 +24,7 @@ type
     CheckSummaryLabel: TLabel;
     TableIdDBLookupComboBox: TDBLookupComboBox;
     Label3: TLabel;
+    procedure CancelCheck(checkId: Integer);
     procedure OpenCheckButtonClick(Sender: TObject);
     procedure AddDishButtonClick(Sender: TObject);
     procedure SaveCheckButtonClick(Sender: TObject);
@@ -34,6 +35,7 @@ type
     procedure RefreshList();
     function DishAlreadyInCheck(dishId: Integer): Boolean;
     procedure FormShow(Sender: TObject);
+    procedure FormClose(Sender: TObject; var Action: TCloseAction);
   private
     { Private declarations }
   public
@@ -79,6 +81,12 @@ begin
   CreateCheckdataModule.DishInCheckQuery.Active := false;
   DishIdDBLookupComboBox.KeyValue := null;
   CountDBEdit.Text := '';
+end;
+
+procedure TCreateCheckForm.CancelCheck(checkId: Integer);
+begin
+  CreateCheckDataModule.CancelCheckQuery.Parameters.ParamByName('КодОткрытогоЧека').Value := checkId;
+  CreateCheckDataModule.CancelCheckQuery.ExecSQL;
 end;
 
 procedure TCreateCheckForm.LockForm();
@@ -151,15 +159,6 @@ begin
   CreateCheckDataModule.CheckSummaryQuery.Close;
 end;
 
-procedure TCreateCheckForm.CancelButtonClick(Sender: TObject);
-begin
-  CreateCheckDataModule.CancelCheckQuery.Parameters.ParamByName('КодОткрытогоЧека').Value := OpenedCheckId;
-  CreateCheckDataModule.CancelCheckQuery.ExecSQL;
-
-  ResetState;
-  LockForm;
-end;
-
 procedure TCreateCheckForm.FormShow(Sender: TObject);
 begin
   CreateCheckDataModule.DishesTable.Active := False;
@@ -167,6 +166,12 @@ begin
 
   ResetState;
   LockForm;
+end;
+
+procedure TCreateCheckForm.FormClose(Sender: TObject; var Action: TCloseAction);
+begin
+  if IsCheckOpened then
+    CancelCheck(OpenedCheckId);
 end;
 
 procedure TCreateCheckForm.OpenCheckButtonClick(Sender: TObject);
@@ -200,6 +205,14 @@ end;
 
 procedure TCreateCheckForm.SaveCheckButtonClick(Sender: TObject);
 begin
+  ResetState;
+  LockForm;
+end;
+
+procedure TCreateCheckForm.CancelButtonClick(Sender: TObject);
+begin
+  CancelCheck(openedCheckId);
+
   ResetState;
   LockForm;
 end;
