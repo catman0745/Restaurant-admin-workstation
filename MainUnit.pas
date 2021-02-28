@@ -18,6 +18,7 @@ type
     ReserveTableButton: TButton;
     TableIsOccupiedButton: TButton;
     TableIsEmptyButton: TButton;
+    Button1: TButton;
     procedure RefreshTablesList();
     function SelectedTableId(): Integer;
     function SelectedTableNumber(): Integer;
@@ -30,6 +31,7 @@ type
     procedure ReserveTableButtonClick(Sender: TObject);
     procedure TableIsOccupiedButtonClick(Sender: TObject);
     procedure TableIsEmptyButtonClick(Sender: TObject);
+    procedure Button1Click(Sender: TObject);
   private
     { Private declarations }
   public
@@ -44,7 +46,7 @@ implementation
 {$R *.dfm}
 
 uses CreateCheckUnit, DishesUnit, ShowChecksFormUnit, WaitersUnit,
-  AssignationUnit, MainDataModuleUnit;
+  AssignationUnit, MainDataModuleUnit, TablesUnit;
 
 function IsNonNegativeInteger(num: string): Boolean;
 var
@@ -185,6 +187,11 @@ end;
 procedure TMainForm.ShowCkecksButtonClick(Sender: TObject);
 begin
   ShowChecksForm.Show;
+end;
+
+procedure TMainForm.Button1Click(Sender: TObject);
+begin
+  TablesForm.Show;
 end;
 
 procedure TMainForm.ManageDishesButtonClick(Sender: TObject);

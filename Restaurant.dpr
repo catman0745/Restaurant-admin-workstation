@@ -13,7 +13,9 @@ uses
   WaitersUnit in 'WaitersUnit.pas' {WaitersForm},
   WaitersDataModuleUnit in 'WaitersDataModuleUnit.pas' {WaitersDataModule: TDataModule},
   AssignationUnit in 'AssignationUnit.pas' {AssignationForm},
-  AssignationDataModuleUnit in 'AssignationDataModuleUnit.pas' {AssignationDataModule: TDataModule};
+  AssignationDataModuleUnit in 'AssignationDataModuleUnit.pas' {AssignationDataModule: TDataModule},
+  TablesUnit in 'TablesUnit.pas' {TablesForm},
+  TablesDataModuleUnit in 'TablesDataModuleUnit.pas' {TablesDataModule: TDataModule};
 
 {$R *.res}
 
@@ -32,5 +34,7 @@ begin
   Application.CreateForm(TWaitersDataModule, WaitersDataModule);
   Application.CreateForm(TAssignationForm, AssignationForm);
   Application.CreateForm(TAssignationDataModule, AssignationDataModule);
+  Application.CreateForm(TTablesForm, TablesForm);
+  Application.CreateForm(TTablesDataModule, TablesDataModule);
   Application.Run;
 end.

@@ -3,7 +3,7 @@ object MainForm: TMainForm
   Top = 0
   Caption = #1040#1056#1052' '#1072#1076#1084#1080#1085#1080#1089#1090#1088#1072#1090#1086#1088#1072' '#1088#1077#1089#1090#1086#1088#1072#1085#1072
   ClientHeight = 353
-  ClientWidth = 529
+  ClientWidth = 553
   Color = clBtnFace
   Font.Charset = DEFAULT_CHARSET
   Font.Color = clWindowText
@@ -16,7 +16,7 @@ object MainForm: TMainForm
   object RegisterNewCheckButton: TButton
     Left = 407
     Top = 8
-    Width = 114
+    Width = 138
     Height = 25
     Caption = #1055#1088#1086#1074#1077#1089#1090#1080' '#1095#1077#1082
     TabOrder = 0
@@ -25,7 +25,7 @@ object MainForm: TMainForm
   object ManageDishesButton: TButton
     Left = 407
     Top = 155
-    Width = 114
+    Width = 138
     Height = 25
     Caption = #1059#1087#1088#1072#1074#1083#1077#1085#1080#1077' '#1084#1077#1085#1102
     TabOrder = 2
@@ -34,7 +34,7 @@ object MainForm: TMainForm
   object ShowCkecksButton: TButton
     Left = 407
     Top = 39
-    Width = 114
+    Width = 138
     Height = 25
     Caption = #1055#1088#1086#1089#1084#1086#1090#1088' '#1095#1077#1082#1086#1074
     TabOrder = 1
@@ -43,7 +43,7 @@ object MainForm: TMainForm
   object WaitersButton: TButton
     Left = 407
     Top = 262
-    Width = 114
+    Width = 138
     Height = 25
     Caption = #1054#1092#1080#1094#1080#1072#1085#1090#1099
     TabOrder = 3
@@ -52,7 +52,7 @@ object MainForm: TMainForm
   object AssignationsButton: TButton
     Left = 407
     Top = 293
-    Width = 114
+    Width = 138
     Height = 25
     Caption = #1043#1088#1072#1092#1080#1082' '#1088#1072#1073#1086#1090#1099
     TabOrder = 4
@@ -110,5 +110,14 @@ object MainForm: TMainForm
     Caption = #1057#1090#1086#1083#1080#1082' '#1086#1089#1074#1086#1073#1086#1076#1080#1083#1089#1103
     TabOrder = 7
     OnClick = TableIsEmptyButtonClick
+  end
+  object Button1: TButton
+    Left = 407
+    Top = 186
+    Width = 138
+    Height = 25
+    Caption = #1059#1087#1088#1072#1074#1083#1077#1085#1080#1077' '#1089#1090#1086#1083#1080#1082#1072#1084#1080
+    TabOrder = 9
+    OnClick = Button1Click
   end
 end
