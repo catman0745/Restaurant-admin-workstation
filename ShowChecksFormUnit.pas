@@ -73,6 +73,9 @@ end;
 
 procedure TShowChecksForm.FormShow(Sender: TObject);
 begin
+  ShowChecksDataModule.ShowChecksQuery.Active := False;
+  ShowChecksDataModule.ShowChecksQuery.Active := True;
+
   SetDefaultState();
 end;
 

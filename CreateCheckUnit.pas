@@ -162,6 +162,9 @@ end;
 
 procedure TCreateCheckForm.FormShow(Sender: TObject);
 begin
+  CreateCheckDataModule.DishesTable.Active := False;
+  CreateCheckDataModule.DishesTable.Active := True;
+
   ResetState;
   LockForm;
 end;

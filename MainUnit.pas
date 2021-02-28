@@ -181,32 +181,32 @@ end;
 
 procedure TMainForm.AssignationsButtonClick(Sender: TObject);
 begin
-  AssignationForm.Show;
+  AssignationForm.ShowModal;
 end;
 
 procedure TMainForm.ShowCkecksButtonClick(Sender: TObject);
 begin
-  ShowChecksForm.Show;
+  ShowChecksForm.ShowModal;
 end;
 
 procedure TMainForm.Button1Click(Sender: TObject);
 begin
-  TablesForm.Show;
+  TablesForm.ShowModal;
 end;
 
 procedure TMainForm.ManageDishesButtonClick(Sender: TObject);
 begin
-  DishesForm.Show
+  DishesForm.ShowModal
 end;
 
 procedure TMainForm.RegisterNewCheckButtonClick(Sender: TObject);
 begin
-  CreateCheckForm.Show
+  CreateCheckForm.ShowModal
 end;
 
 procedure TMainForm.WaitersButtonClick(Sender: TObject);
 begin
-  WaitersForm.Show;
+  WaitersForm.ShowModal;
 end;
 
 end.

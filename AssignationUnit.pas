@@ -26,6 +26,7 @@ type
     function WaiterWorkload(waiterId: Integer): Integer;
     procedure AssignButtonClick(Sender: TObject);
     procedure CancelAssigmentButtonClick(Sender: TObject);
+    procedure FormShow(Sender: TObject);
   private
     { Private declarations }
   public
@@ -143,6 +144,15 @@ begin
 
   AssignationDataModule.CancelAssignationQuery.ExecSQL;
   RefreshList;
+end;
+
+procedure TAssignationForm.FormShow(Sender: TObject);
+begin
+  AssignationDataModule.ShowAssignationsQuery.Active := False;
+  AssignationDataModule.ShowAssignationsQuery.Active := True;
+
+  AssignationDataModule.WaitersTable.Active := False;
+  AssignationDataModule.WaitersTable.Active := True;
 end;
 
 end.
