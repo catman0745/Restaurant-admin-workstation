@@ -33,6 +33,7 @@ type
     procedure LockForm();
     procedure UnlockForm();
     procedure RefreshList();
+    function ValidateDishCount(): Boolean;
     function DishAlreadyInCheck(dishId: Integer): Boolean;
     procedure FormShow(Sender: TObject);
     procedure FormClose(Sender: TObject; var Action: TCloseAction);
@@ -119,6 +120,29 @@ begin
   CreateCheckDataModule.UniquenessQuery.Close;
 end;
 
+function TCreateCheckForm.ValidateDishCount(): Boolean;
+var
+  count: Integer;
+begin
+  if CountDBEdit.GetTextLen = 0 then
+    begin
+      ShowMessage('Введите количество');
+      ValidateDishCount := False;
+      exit;
+    end;
+
+  count := StrToInt(CountDbEdit.Text);
+  if count < 1 then
+    begin
+      ShowMessage('Количество должно быть больше 0');
+      ValidateDishCount := False;
+      exit;
+    end;
+
+
+  ValidateDishCount := True;
+end;
+
 procedure TCreateCheckForm.AddDishButtonClick(Sender: TObject);
 var
   checkSummary: Real;
@@ -128,6 +152,7 @@ begin
       ShowMessage('Блюдо не выбрано');
       Exit
     end;
+  if not ValidateDishCount then exit;
 
   if DishAlreadyInCheck(DishIdDBLookupComboBox.KeyValue) then
     begin
