@@ -17,6 +17,7 @@ type
     AddButton: TButton;
     UpdateButton: TButton;
     DeleteButton: TButton;
+    function SelectedDishId(): Integer;
     procedure Refresh();
     procedure FillForm();
     function ValidateName(): Boolean;
@@ -26,6 +27,7 @@ type
     procedure DeleteButtonClick(Sender: TObject);
     procedure DishesGridCellClick(Column: TColumn);
     procedure UpdateButtonClick(Sender: TObject);
+    procedure FormShow(Sender: TObject);
   private
     { Private declarations }
   public
@@ -34,7 +36,6 @@ type
 
 var
   DishesForm: TDishesForm;
-  SelectedDishId: Integer;
 
 implementation
 
@@ -58,17 +59,23 @@ begin
   DishesDataModule.DisplayQuery.Active := true;
 end;
 
-procedure TDishesForm.FillForm();
-var
-  name: String;
-  price: Real;
+function TDishesForm.SelectedDishId(): Integer;
 begin
   SelectedDishId := DishesDataModule.DisplayDataSource.DataSet.Fields[0].AsInteger;
-  name := DishesDataModule.DisplayDataSource.DataSet.Fields[1].AsString;
-  price := DishesDataModule.DisplayDataSource.DataSet.Fields[2].AsCurrency;
+end;
 
-  NameEdit.Text := name;
-  PriceEdit.Text := floatToStr(price);
+procedure TDishesForm.FillForm();
+begin
+  if not DishesDataModule.DisplayDataSource.DataSet.IsEmpty then
+    begin
+        NameEdit.Text := DishesDataModule.DisplayDataSource.DataSet.Fields[1].AsString;
+        PriceEdit.Text := floatToStr(DishesDataModule.DisplayDataSource.DataSet.Fields[2].AsCurrency);
+    end
+  else
+    begin
+      NameEdit.Text := '';
+      PriceEdit.Text := '';
+    end;
 end;
 
 function TDishesForm.ValidateName(): Boolean;
@@ -159,6 +166,7 @@ begin
   DishesDataModule.AddQuery.ExecSQL;
 
   Refresh;
+  FillForm;
 end;
 
 procedure TDishesForm.UpdateButtonClick(Sender: TObject);
@@ -179,6 +187,7 @@ begin
   DishesDataModule.UpdateQuery.ExecSQL;
 
   Refresh;
+  FillForm;
 end;
 
 procedure TDishesForm.DeleteButtonClick(Sender: TObject);
@@ -192,9 +201,15 @@ begin
   DishesDataModule.DeleteQuery.ExecSQL;
 
   Refresh;
+  FillForm;
 end;
 
 procedure TDishesForm.DishesGridCellClick(Column: TColumn);
+begin
+  FillForm;
+end;
+
+procedure TDishesForm.FormShow(Sender: TObject);
 begin
   FillForm;
 end;

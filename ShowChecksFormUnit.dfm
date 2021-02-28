@@ -70,13 +70,13 @@ object ShowChecksForm: TShowChecksForm
       #1055#1086' '#1074#1086#1079#1088#1072#1089#1090#1072#1085#1080#1102' '#1089#1090#1086#1080#1084#1086#1089#1090#1080
       #1055#1086' '#1091#1073#1099#1074#1072#1085#1080#1102' '#1089#1090#1086#1080#1087#1086#1089#1090#1080)
   end
-  object Button1: TButton
+  object PayCheckButton: TButton
     Left = 367
     Top = 266
     Width = 202
     Height = 25
     Caption = #1042#1099#1076#1077#1083#1077#1085#1085#1099#1081' '#1095#1077#1082' '#1086#1087#1083#1072#1095#1077#1085
     TabOrder = 2
-    OnClick = Button1Click
+    OnClick = PayCheckButtonClick
   end
 end

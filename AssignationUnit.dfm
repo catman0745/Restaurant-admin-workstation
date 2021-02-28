@@ -48,10 +48,12 @@ object AssignationForm: TAssignationForm
     TitleFont.Height = -11
     TitleFont.Name = 'Tahoma'
     TitleFont.Style = []
+    OnCellClick = DBGrid1CellClick
     Columns = <
       item
         Expanded = False
         FieldName = #1044#1077#1085#1100'  '#1085#1077#1076#1077#1083#1080
+        Width = 75
         Visible = True
       end
       item

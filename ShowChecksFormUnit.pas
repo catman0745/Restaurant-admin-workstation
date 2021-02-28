@@ -12,11 +12,11 @@ type
     DBGrid1: TDBGrid;
     Label1: TLabel;
     OrderComboBox: TComboBox;
-    Button1: TButton;
+    PayCheckButton: TButton;
     procedure OrderComboBoxChange(Sender: TObject);
     procedure SetDefaultState;
     procedure FormShow(Sender: TObject);
-    procedure Button1Click(Sender: TObject);
+    procedure PayCheckButtonClick(Sender: TObject);
     procedure RefreshList();
     procedure SortList();
   private
@@ -58,7 +58,7 @@ begin
   OrderComboBox.ItemIndex := 1;
 end;
 
-procedure TShowChecksForm.Button1Click(Sender: TObject);
+procedure TShowChecksForm.PayCheckButtonClick(Sender: TObject);
 var
   checkId: Integer;
 begin
@@ -73,10 +73,8 @@ end;
 
 procedure TShowChecksForm.FormShow(Sender: TObject);
 begin
-  ShowChecksDataModule.ShowChecksQuery.Active := False;
-  ShowChecksDataModule.ShowChecksQuery.Active := True;
-
-  SetDefaultState();
+  RefreshList;
+  SetDefaultState;
 end;
 
 procedure TShowChecksForm.OrderComboBoxChange(Sender: TObject);

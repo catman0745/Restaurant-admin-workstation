@@ -8,6 +8,13 @@ uses
   Vcl.StdCtrls, Vcl.DBCtrls;
 
 type
+  TAssignationId = class
+    DayOfWeek: Integer;
+    Shift: Integer;
+    WaiterId: Integer;
+  end;
+
+type
   TAssignationForm = class(TForm)
     DBGrid1: TDBGrid;
     WeekDayDBLookupComboBox: TDBLookupComboBox;
@@ -18,6 +25,8 @@ type
     Label3: TLabel;
     AssignButton: TButton;
     CancelAssigmentButton: TButton;
+    function SelectedAssignationId(): TAssignationId;
+    procedure FillFields();
     procedure RefreshList();
     function ValidateWeekday(): Boolean;
     function ValidateShift(): Boolean;
@@ -27,6 +36,7 @@ type
     procedure AssignButtonClick(Sender: TObject);
     procedure CancelAssigmentButtonClick(Sender: TObject);
     procedure FormShow(Sender: TObject);
+    procedure DBGrid1CellClick(Column: TColumn);
   private
     { Private declarations }
   public
@@ -41,6 +51,35 @@ implementation
 {$R *.dfm}
 
 uses AssignationDataModuleUnit;
+
+function TAssignationForm.SelectedAssignationId(): TAssignationId;
+var
+  assignationId: TAssignationId;
+begin
+  assignationId := TAssignationId.Create;
+
+  assignationId.DayOfWeek := AssignationDataModule.ShowAssignationsDataSource.DataSet.Fields[0].AsInteger;
+  assignationId.Shift := AssignationDataModule.ShowAssignationsDataSource.DataSet.Fields[2].AsInteger;
+  assignationId.WaiterId := AssignationDataModule.ShowAssignationsDataSource.DataSet.Fields[3].AsInteger;
+
+  SelectedAssignationId := assignationId;
+end;
+
+procedure TAssignationForm.FillFields();
+begin
+  if not AssignationDataModule.ShowAssignationsDataSource.DataSet.IsEmpty then
+    begin
+      WeekDayDBLookupComboBox.KeyValue := SelectedAssignationId.DayOfWeek;
+      ShiftComboBox.ItemIndex := SelectedAssignationId.Shift - 1;
+      WaiterDBLookupComboBox.KeyValue := SelectedAssignationId.WaiterId;
+    end
+  else
+    begin
+      WeekDayDBLookupComboBox.KeyValue := null;
+      ShiftComboBox.ItemIndex := -1;
+      WaiterDBLookupComboBox.KeyValue := null;
+    end;
+end;
 
 procedure TAssignationForm.RefreshList();
 begin
@@ -104,55 +143,57 @@ procedure TAssignationForm.AssignButtonClick(Sender: TObject);
 var
   dayOfWeek, shift, waiterId: Integer;
 begin
-  if ValidateWeekday AND ValidateShift AND ValidateWaiterId then
+  if not (ValidateWeekday AND ValidateShift AND ValidateWaiterId) then exit;
+
+  dayOfWeek := WeekDayDBLookupComboBox.KeyValue;
+  shift := ShiftComboBox.ItemIndex + 1;
+  waiterId := WaiterDBLookupComboBox.KeyValue;
+
+  if AlreadyAssigned(dayOfWeek, shift, waiterId) then
     begin
-      dayOfWeek := WeekDayDBLookupComboBox.KeyValue;
-      shift := ShiftComboBox.ItemIndex + 1;
-      waiterId := WaiterDBLookupComboBox.KeyValue;
-
-      if AlreadyAssigned(dayOfWeek, shift, waiterId) then
-        begin
-          ShowMessage('Официант уже назначен на выбранную смену в этот день');
-          exit;
-        end;
-      if WaiterWorkload(waiterId) >= 6 then
-        begin
-          ShowMessage('Официант не может работать больше 48-ми часов (6 смен) в неделю');
-          exit;
-        end;
-
-      AssignationDataModule.AssignQuery.Parameters.ParamByName('Weekday').Value := dayOfWeek;
-      AssignationDataModule.AssignQuery.Parameters.ParamByName('Shift').Value := shift;
-      AssignationDataModule.AssignQuery.Parameters.ParamByName('WaiterId').Value := waiterId;
-
-      AssignationDataModule.AssignQuery.ExecSQL;
-      RefreshList();
+      ShowMessage('Выбранный официант уже назначен на выбранную смену в этот день');
+      exit;
     end;
+  if WaiterWorkload(waiterId) >= 6 then
+    begin
+      ShowMessage('Официант не может работать больше 48-ми часов (6 смен) в неделю');
+      exit;
+    end;
+
+  AssignationDataModule.AssignQuery.Parameters.ParamByName('Weekday').Value := dayOfWeek;
+  AssignationDataModule.AssignQuery.Parameters.ParamByName('Shift').Value := shift;
+  AssignationDataModule.AssignQuery.Parameters.ParamByName('WaiterId').Value := waiterId;
+
+  AssignationDataModule.AssignQuery.ExecSQL;
+
+  RefreshList();
+  FillFields;
 end;
 
 procedure TAssignationForm.CancelAssigmentButtonClick(Sender: TObject);
-var
-  dayOfWeek, shift, waiterId: Integer;
 begin
-  dayOfWeek := AssignationDataModule.ShowAssignationsDataSource.DataSet.Fields[0].AsInteger;
-  shift := AssignationDataModule.ShowAssignationsDataSource.DataSet.Fields[2].AsInteger;
-  waiterId := AssignationDataModule.ShowAssignationsDataSource.DataSet.Fields[3].AsInteger;
-
-  AssignationDataModule.CancelAssignationQuery.Parameters.ParamByName('Weekday').Value := dayOfWeek;
-  AssignationDataModule.CancelAssignationQuery.Parameters.ParamByName('Shift').Value := shift;
-  AssignationDataModule.CancelAssignationQuery.Parameters.ParamByName('WaiterId').Value := waiterId;
+  AssignationDataModule.CancelAssignationQuery.Parameters.ParamByName('Weekday').Value := SelectedAssignationId.DayOfWeek;
+  AssignationDataModule.CancelAssignationQuery.Parameters.ParamByName('Shift').Value := SelectedAssignationId.Shift;
+  AssignationDataModule.CancelAssignationQuery.Parameters.ParamByName('WaiterId').Value := SelectedAssignationId.WaiterId;
 
   AssignationDataModule.CancelAssignationQuery.ExecSQL;
+
   RefreshList;
+  FillFields;
+end;
+
+procedure TAssignationForm.DBGrid1CellClick(Column: TColumn);
+begin
+  FillFields;
 end;
 
 procedure TAssignationForm.FormShow(Sender: TObject);
 begin
-  AssignationDataModule.ShowAssignationsQuery.Active := False;
-  AssignationDataModule.ShowAssignationsQuery.Active := True;
-
   AssignationDataModule.WaitersTable.Active := False;
   AssignationDataModule.WaitersTable.Active := True;
+
+  RefreshList;
+  FillFields;
 end;
 
 end.

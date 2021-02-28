@@ -15,12 +15,15 @@ type
     AddButton: TButton;
     UpdateButton: TButton;
     DeleteButton: TButton;
+    function SelectedWaiterId(): Integer;
     procedure RefreshList();
+    procedure FillFields();
     function ValidateName(): Boolean;
     procedure AddButtonClick(Sender: TObject);
     procedure UpdateButtonClick(Sender: TObject);
     procedure DeleteButtonClick(Sender: TObject);
     procedure DisplayGridCellClick(Column: TColumn);
+    procedure FormShow(Sender: TObject);
   private
     { Private declarations }
   public
@@ -29,7 +32,6 @@ type
 
 var
   WaitersForm: TWaitersForm;
-  SelectedWaiterId: Integer;
 
 implementation
 
@@ -41,6 +43,19 @@ procedure TWaitersForm.RefreshList();
 begin
   WaitersDataModule.WaitersTable.Active := false;
   WaitersDataModule.WaitersTable.Active := true;
+end;
+
+procedure TWaitersForm.FillFields();
+begin
+  if not WaitersDataModule.DisplayDataSource.DataSet.IsEmpty then
+    NameEdit.Text := WaitersDataModule.DisplayDataSource.DataSet.Fields[1].AsString
+  else
+    NameEdit.Text := '';
+end;
+
+function TWaitersForm.SelectedWaiterId(): Integer;
+begin
+  SelectedWaiterId := WaitersDataModule.DisplayDataSource.DataSet.Fields[0].AsInteger;
 end;
 
 function TWaitersForm.ValidateName(): Boolean;
@@ -73,6 +88,7 @@ begin
   WaitersDataModule.AddQuery.ExecSQL;
 
   RefreshList;
+  FillFields;
 end;
 
 procedure TWaitersForm.UpdateButtonClick(Sender: TObject);
@@ -90,6 +106,7 @@ begin
   WaitersDataModule.UpdateQuery.ExecSQL;
 
   RefreshList;
+  FillFields;
 end;
 
 procedure TWaitersForm.DeleteButtonClick(Sender: TObject);
@@ -99,16 +116,17 @@ begin
   WaitersDataModule.DeleteQuery.ExecSQL;
 
   RefreshList;
+  FillFields;
 end;
 
 procedure TWaitersForm.DisplayGridCellClick(Column: TColumn);
-var
-  name: String;
 begin
-  SelectedWaiterId := WaitersDataModule.DisplayDataSource.DataSet.Fields[0].AsInteger;
-  name := WaitersDataModule.DisplayDataSource.DataSet.Fields[1].AsString;
+  FillFields;
+end;
 
-  NameEdit.Text := name;
+procedure TWaitersForm.FormShow(Sender: TObject);
+begin
+  FillFields;
 end;
 
 end.
