@@ -131,6 +131,12 @@ var
   status, time: String;
   confirmed: Boolean;
 begin
+  if MainDataModule.DisplayTablesDataSource.DataSet.IsEmpty then
+    begin
+      ShowMessage('Столик не выбран');
+      exit;
+    end;
+
   status := TableStatus(SelectedTableId);
   if status = 'Зарезервирован' then
     begin
