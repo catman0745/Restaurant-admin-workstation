@@ -46,11 +46,13 @@ object DishesForm: TDishesForm
       item
         Expanded = False
         FieldName = #1053#1072#1079#1074#1072#1085#1080#1077
+        Width = 281
         Visible = True
       end
       item
         Expanded = False
         FieldName = #1062#1077#1085#1072
+        Width = 68
         Visible = True
       end>
   end

@@ -3,7 +3,7 @@ object AssignationForm: TAssignationForm
   Top = 0
   Caption = #1056#1072#1089#1087#1080#1089#1072#1085#1080#1077' '#1088#1072#1073#1086#1090#1099' '#1086#1092#1080#1094#1080#1072#1085#1090#1086#1074
   ClientHeight = 299
-  ClientWidth = 596
+  ClientWidth = 617
   Color = clBtnFace
   Font.Charset = DEFAULT_CHARSET
   Font.Color = clWindowText
@@ -15,21 +15,21 @@ object AssignationForm: TAssignationForm
   PixelsPerInch = 96
   TextHeight = 13
   object Label1: TLabel
-    Left = 399
+    Left = 423
     Top = 64
     Width = 69
     Height = 13
     Caption = #1053#1086#1084#1077#1088' '#1089#1084#1077#1085#1099':'
   end
   object Label2: TLabel
-    Left = 399
+    Left = 423
     Top = 8
     Width = 70
     Height = 13
     Caption = #1044#1077#1085#1100' '#1085#1077#1076#1077#1083#1080':'
   end
   object Label3: TLabel
-    Left = 399
+    Left = 423
     Top = 118
     Width = 52
     Height = 13
@@ -38,7 +38,7 @@ object AssignationForm: TAssignationForm
   object DBGrid1: TDBGrid
     Left = 8
     Top = 8
-    Width = 385
+    Width = 393
     Height = 283
     DataSource = AssignationDataModule.ShowAssignationsDataSource
     ReadOnly = True
@@ -68,7 +68,7 @@ object AssignationForm: TAssignationForm
       end>
   end
   object WeekDayDBLookupComboBox: TDBLookupComboBox
-    Left = 399
+    Left = 423
     Top = 27
     Width = 187
     Height = 21
@@ -78,7 +78,7 @@ object AssignationForm: TAssignationForm
     TabOrder = 1
   end
   object WaiterDBLookupComboBox: TDBLookupComboBox
-    Left = 399
+    Left = 423
     Top = 137
     Width = 187
     Height = 21
@@ -88,7 +88,7 @@ object AssignationForm: TAssignationForm
     TabOrder = 2
   end
   object ShiftComboBox: TComboBox
-    Left = 399
+    Left = 423
     Top = 83
     Width = 187
     Height = 21
@@ -99,7 +99,7 @@ object AssignationForm: TAssignationForm
       '2 ('#1053#1086#1095#1085#1072#1103' '#1089#1084#1077#1085#1072')')
   end
   object AssignButton: TButton
-    Left = 399
+    Left = 423
     Top = 176
     Width = 187
     Height = 25
@@ -108,7 +108,7 @@ object AssignationForm: TAssignationForm
     OnClick = AssignButtonClick
   end
   object CancelAssigmentButton: TButton
-    Left = 399
+    Left = 423
     Top = 266
     Width = 187
     Height = 25
