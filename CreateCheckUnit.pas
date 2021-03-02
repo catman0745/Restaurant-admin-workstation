@@ -189,6 +189,9 @@ begin
   CreateCheckDataModule.DishesTable.Active := False;
   CreateCheckDataModule.DishesTable.Active := True;
 
+  CreateCheckDataModule.TablesTable.Active := False;
+  CreateCheckDataModule.TablesTable.Active := True;
+
   ResetState;
   LockForm;
 end;
