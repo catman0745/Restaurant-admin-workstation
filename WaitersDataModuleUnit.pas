@@ -7,13 +7,11 @@ uses
 
 type
   TWaitersDataModule = class(TDataModule)
-    WaitersTable: TADOTable;
     DisplayDataSource: TDataSource;
-    WaitersTableЛичныйномер: TAutoIncField;
-    WaitersTableФИО: TWideStringField;
     AddQuery: TADOQuery;
     UpdateQuery: TADOQuery;
     DeleteQuery: TADOQuery;
+    WaitersQuery: TADOQuery;
   private
     { Private declarations }
   public

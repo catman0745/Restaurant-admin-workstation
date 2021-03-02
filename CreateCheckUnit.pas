@@ -186,11 +186,11 @@ end;
 
 procedure TCreateCheckForm.FormShow(Sender: TObject);
 begin
-  CreateCheckDataModule.DishesTable.Active := False;
-  CreateCheckDataModule.DishesTable.Active := True;
+  CreateCheckDataModule.DishesQuery.Active := False;
+  CreateCheckDataModule.DishesQuery.Active := True;
 
-  CreateCheckDataModule.TablesTable.Active := False;
-  CreateCheckDataModule.TablesTable.Active := True;
+  CreateCheckDataModule.TablesQuery.Active := False;
+  CreateCheckDataModule.TablesQuery.Active := True;
 
   ResetState;
   LockForm;

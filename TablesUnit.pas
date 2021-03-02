@@ -57,8 +57,8 @@ end;
 
 procedure TTablesForm.RefreshList();
 begin
-  TablesDataModule.TablesTable.Active := False;
-  TablesDataModule.TablesTable.Active := True;
+  TablesDataModule.TablesQuery.Active := False;
+  TablesDataModule.TablesQuery.Active := True;
 
   MainDataModule.DisplayTablesQuery.Active := False;
   MainDataModule.DisplayTablesQuery.Active := True;

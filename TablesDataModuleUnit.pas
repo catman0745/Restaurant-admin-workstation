@@ -7,12 +7,12 @@ uses
 
 type
   TTablesDataModule = class(TDataModule)
-    TablesTable: TADOTable;
     TablesDataSource: TDataSource;
     AddQuery: TADOQuery;
     UpdateQuery: TADOQuery;
     DeleteQuery: TADOQuery;
     TableNumberUniquenessCheckQuery: TADOQuery;
+    TablesQuery: TADOQuery;
   private
     { Private declarations }
   public

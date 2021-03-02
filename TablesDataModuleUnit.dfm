@@ -2,16 +2,8 @@ object TablesDataModule: TTablesDataModule
   OldCreateOrder = False
   Height = 173
   Width = 512
-  object TablesTable: TADOTable
-    Active = True
-    Connection = MainDataModule.Connection
-    CursorType = ctStatic
-    TableName = #1057#1090#1086#1083#1080#1082#1080
-    Left = 40
-    Top = 8
-  end
   object TablesDataSource: TDataSource
-    DataSet = TablesTable
+    DataSet = TablesQuery
     Left = 40
     Top = 56
   end
@@ -107,5 +99,17 @@ object TablesDataModule: TTablesDataModule
       '     AND '#1050#1086#1076' <> :ExceptionId')
     Left = 376
     Top = 48
+  end
+  object TablesQuery: TADOQuery
+    Active = True
+    Connection = MainDataModule.Connection
+    CursorType = ctStatic
+    Parameters = <>
+    SQL.Strings = (
+      'SELECT *'
+      'FROM '#1057#1090#1086#1083#1080#1082#1080
+      'ORDER BY '#1053#1086#1084#1077#1088)
+    Left = 40
+    Top = 8
   end
 end

@@ -1,25 +1,9 @@
-﻿object WaitersDataModule: TWaitersDataModule
+object WaitersDataModule: TWaitersDataModule
   OldCreateOrder = False
   Height = 323
   Width = 277
-  object WaitersTable: TADOTable
-    Active = True
-    Connection = MainDataModule.Connection
-    CursorType = ctStatic
-    TableName = #1055#1077#1088#1089#1086#1085#1072#1083
-    Left = 40
-    Top = 8
-    object WaitersTableЛичныйномер: TAutoIncField
-      FieldName = #1051#1080#1095#1085#1099#1081' '#1085#1086#1084#1077#1088
-      ReadOnly = True
-    end
-    object WaitersTableФИО: TWideStringField
-      FieldName = #1060#1048#1054
-      Size = 30
-    end
-  end
   object DisplayDataSource: TDataSource
-    DataSet = WaitersTable
+    DataSet = WaitersQuery
     Left = 40
     Top = 56
   end
@@ -86,5 +70,17 @@
       'WHERE ['#1051#1080#1095#1085#1099#1081' '#1085#1086#1084#1077#1088'] = :Id')
     Left = 216
     Top = 104
+  end
+  object WaitersQuery: TADOQuery
+    Active = True
+    Connection = MainDataModule.Connection
+    CursorType = ctStatic
+    Parameters = <>
+    SQL.Strings = (
+      'SELECT *'
+      'FROM '#1055#1077#1088#1089#1086#1085#1072#1083
+      'ORDER BY '#1060#1048#1054)
+    Left = 40
+    Top = 8
   end
 end

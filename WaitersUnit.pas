@@ -41,8 +41,8 @@ uses WaitersDataModuleUnit;
 
 procedure TWaitersForm.RefreshList();
 begin
-  WaitersDataModule.WaitersTable.Active := false;
-  WaitersDataModule.WaitersTable.Active := true;
+  WaitersDataModule.WaitersQuery.Active := false;
+  WaitersDataModule.WaitersQuery.Active := true;
 end;
 
 procedure TWaitersForm.FillFields();

@@ -38,7 +38,8 @@
       'SELECT '#1053#1072#1079#1074#1072#1085#1080#1077', '#1050#1086#1083#1080#1095#1077#1089#1090#1074#1086
       'FROM ['#1041#1083#1102#1076#1086' '#1074' '#1095#1077#1082#1077']'
       'INNER JOIN '#1041#1083#1102#1076#1072' ON '#1041#1083#1102#1076#1072'.'#1050#1086#1076' = ['#1041#1083#1102#1076#1086' '#1074' '#1095#1077#1082#1077'].'#1041#1083#1102#1076#1086
-      'WHERE '#1063#1077#1082' = :'#1050#1086#1076#1054#1090#1082#1088#1099#1090#1086#1075#1086#1063#1077#1082#1072)
+      'WHERE '#1063#1077#1082' = :'#1050#1086#1076#1054#1090#1082#1088#1099#1090#1086#1075#1086#1063#1077#1082#1072
+      'ORDER BY '#1053#1072#1079#1074#1072#1085#1080#1077)
     Left = 176
     Top = 16
     object DishInCheckQueryНазвание: TWideStringField
@@ -63,33 +64,8 @@
     Left = 48
     Top = 64
   end
-  object DishInCheckTable: TADOTable
-    Active = True
-    Connection = MainDataModule.Connection
-    CursorType = ctStatic
-    TableName = #1041#1083#1102#1076#1086' '#1074' '#1095#1077#1082#1077
-    Left = 312
-    Top = 16
-    object DishInCheckTableБлюдо: TIntegerField
-      FieldName = #1041#1083#1102#1076#1086
-    end
-    object DishInCheckTableЧек: TIntegerField
-      FieldName = #1063#1077#1082
-    end
-    object DishInCheckTableКоличество: TIntegerField
-      FieldName = #1050#1086#1083#1080#1095#1077#1089#1090#1074#1086
-    end
-  end
-  object DishesTable: TADOTable
-    Active = True
-    Connection = MainDataModule.Connection
-    CursorType = ctStatic
-    TableName = #1041#1083#1102#1076#1072
-    Left = 440
-    Top = 16
-  end
   object DishesDataSource: TDataSource
-    DataSet = DishesTable
+    DataSet = DishesQuery
     Left = 440
     Top = 64
   end
@@ -203,17 +179,40 @@
     Left = 672
     Top = 64
   end
-  object TablesTable: TADOTable
-    Active = True
+  object TablesDataSource: TDataSource
+    DataSet = TablesQuery
+    Left = 480
+    Top = 248
+  end
+  object TablesQuery: TADOQuery
     Connection = MainDataModule.Connection
-    CursorType = ctStatic
-    TableName = #1057#1090#1086#1083#1080#1082#1080
+    Parameters = <>
+    SQL.Strings = (
+      'SELECT *'
+      'FROM '#1057#1090#1086#1083#1080#1082#1080
+      'ORDER BY '#1053#1086#1084#1077#1088)
     Left = 480
     Top = 200
   end
-  object TablesDataSource: TDataSource
-    DataSet = TablesTable
-    Left = 480
-    Top = 248
+  object DishInCheckTable: TADOTable
+    Active = True
+    Connection = MainDataModule.Connection
+    CursorType = ctStatic
+    TableName = #1041#1083#1102#1076#1086' '#1074' '#1095#1077#1082#1077
+    Left = 312
+    Top = 16
+  end
+  object DishesQuery: TADOQuery
+    Active = True
+    Connection = MainDataModule.Connection
+    CursorType = ctStatic
+    Parameters = <>
+    SQL.Strings = (
+      'SELECT '#1050#1086#1076', '#1053#1072#1079#1074#1072#1085#1080#1077
+      'FROM '#1041#1083#1102#1076#1072
+      'ORDER BY '#1053#1072#1079#1074#1072#1085#1080#1077
+      '')
+    Left = 440
+    Top = 16
   end
 end

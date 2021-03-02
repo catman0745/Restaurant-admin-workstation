@@ -13,19 +13,16 @@ type
     OpenedCheckIdQuery: TADOQuery;
     DishInCheckQueryНазвание: TWideStringField;
     DishInCheckQueryКоличество: TIntegerField;
-    DishInCheckTable: TADOTable;
-    DishInCheckTableБлюдо: TIntegerField;
-    DishInCheckTableЧек: TIntegerField;
-    DishInCheckTableКоличество: TIntegerField;
-    DishesTable: TADOTable;
     DishesDataSource: TDataSource;
     DishInCheckDataSource2: TDataSource;
     CancelCheckQuery: TADOQuery;
     CheckSummaryQuery: TADOQuery;
     UniquenessQuery: TADOQuery;
     UpdateCountQuery: TADOQuery;
-    TablesTable: TADOTable;
     TablesDataSource: TDataSource;
+    TablesQuery: TADOQuery;
+    DishInCheckTable: TADOTable;
+    DishesQuery: TADOQuery;
   private
     { Private declarations }
   public
