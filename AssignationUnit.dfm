@@ -3,7 +3,7 @@ object AssignationForm: TAssignationForm
   Top = 0
   Caption = #1056#1072#1089#1087#1080#1089#1072#1085#1080#1077' '#1088#1072#1073#1086#1090#1099' '#1086#1092#1080#1094#1080#1072#1085#1090#1086#1074
   ClientHeight = 299
-  ClientWidth = 617
+  ClientWidth = 625
   Color = clBtnFace
   Font.Charset = DEFAULT_CHARSET
   Font.Color = clWindowText
@@ -70,7 +70,7 @@ object AssignationForm: TAssignationForm
   object WeekDayDBLookupComboBox: TDBLookupComboBox
     Left = 423
     Top = 27
-    Width = 187
+    Width = 194
     Height = 21
     KeyField = #1053#1086#1084#1077#1088' '#1087#1086' '#1087#1086#1088#1103#1076#1082#1091
     ListField = #1053#1072#1079#1074#1072#1085#1080#1077
@@ -80,7 +80,7 @@ object AssignationForm: TAssignationForm
   object WaiterDBLookupComboBox: TDBLookupComboBox
     Left = 423
     Top = 137
-    Width = 187
+    Width = 194
     Height = 21
     KeyField = #1051#1080#1095#1085#1099#1081' '#1085#1086#1084#1077#1088
     ListField = #1060#1048#1054
@@ -90,7 +90,7 @@ object AssignationForm: TAssignationForm
   object ShiftComboBox: TComboBox
     Left = 423
     Top = 83
-    Width = 187
+    Width = 194
     Height = 21
     Style = csDropDownList
     TabOrder = 3
@@ -101,19 +101,28 @@ object AssignationForm: TAssignationForm
   object AssignButton: TButton
     Left = 423
     Top = 176
-    Width = 187
+    Width = 194
     Height = 25
     Caption = #1053#1072#1079#1085#1072#1095#1080#1090#1100' '#1086#1092#1080#1094#1080#1072#1085#1090#1072
     TabOrder = 4
     OnClick = AssignButtonClick
   end
   object CancelAssigmentButton: TButton
-    Left = 423
-    Top = 266
-    Width = 187
+    Left = 422
+    Top = 207
+    Width = 195
     Height = 25
     Caption = #1054#1090#1084#1077#1085#1080#1090#1100' '#1074#1099#1073#1088#1072#1085#1085#1086#1077' '#1085#1072#1079#1085#1072#1095#1077#1085#1080#1077
     TabOrder = 5
     OnClick = CancelAssigmentButtonClick
+  end
+  object ReportButton: TButton
+    Left = 423
+    Top = 266
+    Width = 194
+    Height = 25
+    Caption = #1055#1086#1076#1075#1086#1090#1086#1074#1080#1090#1100' '#1086#1090#1095#1105#1090' '#1087#1086' '#1075#1088#1072#1092#1080#1082#1091
+    TabOrder = 6
+    OnClick = ReportButtonClick
   end
 end

@@ -25,6 +25,7 @@ type
     Label3: TLabel;
     AssignButton: TButton;
     CancelAssigmentButton: TButton;
+    ReportButton: TButton;
     function SelectedAssignationId(): TAssignationId;
     procedure FillFields();
     procedure RefreshList();
@@ -37,6 +38,7 @@ type
     procedure CancelAssigmentButtonClick(Sender: TObject);
     procedure FormShow(Sender: TObject);
     procedure DBGrid1CellClick(Column: TColumn);
+    procedure ReportButtonClick(Sender: TObject);
   private
     { Private declarations }
   public
@@ -50,7 +52,7 @@ implementation
 
 {$R *.dfm}
 
-uses AssignationDataModuleUnit;
+uses AssignationDataModuleUnit, AssignationResportFormUnit;
 
 function TAssignationForm.SelectedAssignationId(): TAssignationId;
 var
@@ -85,6 +87,13 @@ procedure TAssignationForm.RefreshList();
 begin
   AssignationDataModule.ShowAssignationsQuery.Active := false;
   AssignationDataModule.ShowAssignationsQuery.Active := true;
+end;
+
+procedure TAssignationForm.ReportButtonClick(Sender: TObject);
+begin
+  // show report
+  AssignationResportForm.Show;
+  AssignationResportForm.Report.ShowReport;
 end;
 
 function TAssignationForm.ValidateWeekday(): Boolean;

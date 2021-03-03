@@ -15,7 +15,8 @@ uses
   AssignationUnit in 'AssignationUnit.pas' {AssignationForm},
   AssignationDataModuleUnit in 'AssignationDataModuleUnit.pas' {AssignationDataModule: TDataModule},
   TablesUnit in 'TablesUnit.pas' {TablesForm},
-  TablesDataModuleUnit in 'TablesDataModuleUnit.pas' {TablesDataModule: TDataModule};
+  TablesDataModuleUnit in 'TablesDataModuleUnit.pas' {TablesDataModule: TDataModule},
+  AssignationResportFormUnit in 'AssignationResportFormUnit.pas' {AssignationResportForm};
 
 {$R *.res}
 
@@ -36,5 +37,6 @@ begin
   Application.CreateForm(TAssignationDataModule, AssignationDataModule);
   Application.CreateForm(TTablesForm, TablesForm);
   Application.CreateForm(TTablesDataModule, TablesDataModule);
+  Application.CreateForm(TAssignationResportForm, AssignationResportForm);
   Application.Run;
 end.
