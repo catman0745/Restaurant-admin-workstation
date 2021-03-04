@@ -10,6 +10,8 @@ type
     ShowChecksQuery: TADOQuery;
     ShowChecksDataSource: TDataSource;
     CloseCheckQuery: TADOQuery;
+    ReportQuery: TADOQuery;
+    ReportDataSource: TDataSource;
   private
     { Private declarations }
   public

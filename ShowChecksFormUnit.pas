@@ -13,12 +13,14 @@ type
     Label1: TLabel;
     OrderComboBox: TComboBox;
     PayCheckButton: TButton;
+    ReportButton: TButton;
     procedure OrderComboBoxChange(Sender: TObject);
     procedure SetDefaultState;
     procedure FormShow(Sender: TObject);
     procedure PayCheckButtonClick(Sender: TObject);
     procedure RefreshList();
     procedure SortList();
+    procedure ReportButtonClick(Sender: TObject);
   private
     { Private declarations }
   public
@@ -32,12 +34,25 @@ implementation
 
 {$R *.dfm}
 
-uses ShowChecksDataModuleUnit;
+uses ShowChecksDataModuleUnit, CheckReportFormUnit;
 
 procedure TShowChecksForm.RefreshList();
 begin
   ShowChecksDataModule.ShowChecksQuery.Active := false;
   ShowChecksDataModule.ShowChecksQuery.Active := true;
+end;
+
+procedure TShowChecksForm.ReportButtonClick(Sender: TObject);
+var
+  selectedCheckId: Integer;
+begin
+  ShowChecksDataModule.ReportQuery.Close;
+  selectedCheckId := ShowChecksDataModule.ShowChecksDataSource.DataSet.Fields[0].AsInteger;
+  ShowChecksDataModule.ReportQuery.Parameters.ParamByName('CheckId').Value := selectedCheckId;
+  ShowChecksDataModule.ReportQuery.Open;
+
+  CheckReportForm.Show;
+  CheckReportForm.Report.ShowReport;
 end;
 
 procedure TShowChecksForm.SortList();

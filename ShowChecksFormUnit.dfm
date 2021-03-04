@@ -72,11 +72,20 @@ object ShowChecksForm: TShowChecksForm
   end
   object PayCheckButton: TButton
     Left = 367
-    Top = 266
+    Top = 235
     Width = 202
     Height = 25
     Caption = #1042#1099#1076#1077#1083#1077#1085#1085#1099#1081' '#1095#1077#1082' '#1086#1087#1083#1072#1095#1077#1085
     TabOrder = 2
     OnClick = PayCheckButtonClick
+  end
+  object ReportButton: TButton
+    Left = 367
+    Top = 266
+    Width = 203
+    Height = 25
+    Caption = #1055#1088#1086#1089#1084#1086#1090#1088#1077#1090#1100' '#1095#1077#1082
+    TabOrder = 3
+    OnClick = ReportButtonClick
   end
 end
