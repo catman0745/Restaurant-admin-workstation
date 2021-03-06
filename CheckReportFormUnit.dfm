@@ -1,7 +1,7 @@
 object CheckReportForm: TCheckReportForm
   Left = 0
   Top = 0
-  Caption = 'CheckReportForm'
+  Caption = #1055#1088#1086#1089#1084#1086#1090#1088' '#1095#1077#1082#1072
   ClientHeight = 299
   ClientWidth = 635
   Color = clBtnFace
@@ -25,10 +25,6 @@ object CheckReportForm: TCheckReportForm
     FindFmVisible = False
     UseReportHints = True
     HideScrolls = False
-    ExplicitLeft = 168
-    ExplicitTop = 64
-    ExplicitWidth = 100
-    ExplicitHeight = 100
   end
   object ReportDataset: TfrxDBDataset
     UserName = 'ReportDataset'
