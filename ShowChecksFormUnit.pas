@@ -58,10 +58,10 @@ end;
 procedure TShowChecksForm.SortList();
 begin
   case OrderComboBox.ItemIndex of
-    0: ShowChecksDataModule.ShowChecksQuery.Sort := '[Дата и время оформления]';
-    1: ShowChecksDataModule.ShowChecksQuery.Sort := '[Дата и время оформления] DESC';
-    2: ShowChecksDataModule.ShowChecksQuery.Sort := 'Оплачен';
-    3: ShowChecksDataModule.ShowChecksQuery.Sort := 'Оплачен DESC';
+    0: ShowChecksDataModule.ShowChecksQuery.Sort := '[Дата и время оформления] DESC';
+    1: ShowChecksDataModule.ShowChecksQuery.Sort := '[Дата и время оформления]';
+    2: ShowChecksDataModule.ShowChecksQuery.Sort := 'Оплачен DESC';
+    3: ShowChecksDataModule.ShowChecksQuery.Sort := 'Оплачен';
     4: ShowChecksDataModule.ShowChecksQuery.Sort := '[Стоимость в чеке]';
     5: ShowChecksDataModule.ShowChecksQuery.Sort := '[Стоимость в чеке] DESC';
   end;
@@ -70,7 +70,7 @@ end;
 procedure TShowChecksForm.SetDefaultState();
 begin
   ShowChecksDataModule.ShowChecksQuery.Sort := '[Дата и время оформления] DESC';
-  OrderComboBox.ItemIndex := 1;
+  OrderComboBox.ItemIndex := 0;
 end;
 
 procedure TShowChecksForm.PayCheckButtonClick(Sender: TObject);
